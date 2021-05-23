@@ -1,0 +1,50 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Basic\Test\ValueObject;
+
+use Basic\DomainSupport\Exception\InvariantException;
+use Basic\DomainSupport\ValueObjects\PositiveNumber;
+use Basic\DomainSupport\ValueObjects\StringValueObject;
+use Tests\TestCase;
+
+final class ValueObjectTest extends TestCase
+{
+    /**
+     * @test
+     */
+    public function String型VO()
+    {
+        $text = 'text';
+        $stringVO = ConcreteStringValueObject::of($text);
+        $this->assertEquals($text, $stringVO->value());
+        $this->assertTrue($stringVO->equals(ConcreteStringValueObject::of($text)));
+    }
+
+    /**
+     * @test
+     */
+    public function 正数型VO()
+    {
+        $number = 1;
+        $poNum = ConcretePositiveNumberValueObject::of($number);
+        self::assertEquals($number, $poNum->value());
+
+        $number = -1;
+
+        //マイナス値は例外が発生することを確認
+        $this->expectException(InvariantException::class);
+        $poNum = ConcretePositiveNumberValueObject::of($number);
+    }
+}
+
+class ConcreteStringValueObject extends StringValueObject
+{
+
+}
+
+class ConcretePositiveNumberValueObject extends PositiveNumber
+{
+
+}
