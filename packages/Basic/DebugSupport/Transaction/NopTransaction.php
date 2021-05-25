@@ -22,6 +22,7 @@ final class NopTransaction implements Transaction
      */
     public function scope(callable $transactionScope): ?object
     {
+        Log::info('トランザクション');
         return $transactionScope();
     }
 

@@ -27,9 +27,9 @@ interface Factory
 
     /**
      * @param \Basic\DomainSupport\Domain\Domain $domain
-     * @param array                              $hiddenOption 隠したい配列のキーを記述
+     * @param string[]                           $hiddenOption 隠したい配列のキーを記述
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function toArray(Domain $domain, array $hiddenOption = []): array;
 }

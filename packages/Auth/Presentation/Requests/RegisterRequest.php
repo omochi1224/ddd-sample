@@ -32,7 +32,7 @@ final class RegisterRequest extends FormRequest implements Domainable
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public function rules()
     {

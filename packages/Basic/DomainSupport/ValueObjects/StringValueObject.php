@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Basic\DomainSupport\ValueObjects;
 
 /**
+ * 文字列オブジェクト
+ *
  * Class StringValueObject
  *
  * @package Basic\DomainSupport\ValueObjects

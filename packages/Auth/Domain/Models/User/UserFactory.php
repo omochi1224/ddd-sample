@@ -52,9 +52,9 @@ final class UserFactory implements Factory
 
     /**
      * @param \Basic\DomainSupport\Domain\Domain $domain
-     * @param array                              $hiddenOption
+     * @param string[]                           $hiddenOption
      *
-     * @return string[]
+     * @return array<string, string>
      */
     public static function toArray(Domain $domain, array $hiddenOption = []): array
     {
@@ -72,7 +72,6 @@ final class UserFactory implements Factory
                     foreach ($hiddenOption as $option) {
                         return $option !== $key;
                     }
-                    return [];
                 },
                 ARRAY_FILTER_USE_BOTH
             );

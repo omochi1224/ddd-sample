@@ -7,6 +7,8 @@ namespace Basic\DomainSupport\ValueObjects;
 use Basic\DomainSupport\Exception\InvariantException;
 
 /**
+ * 正数オブジェクト
+ *
  * Class PositiveNumber
  *
  * @package Basic\DomainSupport\ValueObjects

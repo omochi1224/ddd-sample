@@ -1,0 +1,29 @@
+parameters:
+  level: 7
+  bootstrap: null
+  excludes_analyse: []
+  autoload_directories: []
+  autoload_files: []
+  fileExtensions:
+      - php
+  checkAlwaysTrueCheckTypeFunctionCall: false
+  checkAlwaysTrueInstanceof: false
+  checkClassCaseSensitivity: false
+  checkFunctionArgumentTypes: false
+  checkArgumentsPassedByReference: false
+  checkMaybeUndefinedVariables: false
+  checkNullables: false
+  checkThisOnly: true
+  checkUnionTypes: false
+  polluteScopeWithLoopInitialAssignments: true
+  polluteCatchScopeWithTryAssignments: false
+  ignoreErrors: []
+  internalErrorsCountLimit: 50
+  reportUnmatchedIgnoredErrors: true
+  universalObjectCratesClasses:
+      - stdClass
+      - SimpleXMLElement
+  excludePaths:
+    - packages/Basic #除外ディレクトリ
+  paths:
+    - packages

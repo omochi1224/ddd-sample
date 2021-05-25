@@ -67,6 +67,12 @@
         ],
         "sniffer-rewrite": [
             "./vendor/bin/phpcbf --standard=phpcs.xml ./"
+        ],
+        "sniffer-report-csv": [
+            "./vendor/bin/phpcs --standard=phpcs.xml --report=csv --report-file=./sniffer-reports/report.csv ./"
+        ],
+        "static-type-check": [
+            "vendor/bin/phpstan analyse -c phpstan.neon"
         ]
     }
 }

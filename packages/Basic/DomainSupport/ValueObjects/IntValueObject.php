@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Basic\DomainSupport\ValueObjects;
 
+/**
+ * 数値基本オブジェクト
+ *
+ * Class IntValueObject
+ *
+ * @package Basic\DomainSupport\ValueObjects
+ */
 abstract class IntValueObject
 {
     /**
      * @var integer
      */
-    protected $value;
+    protected int $value;
 
     /**
      * Identifier constructor.

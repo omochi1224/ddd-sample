@@ -18,7 +18,7 @@ use Auth\Domain\Models\User\ValueObject\UserId;
 final class DummyUserRepository implements UserRepository
 {
     /**
-     * @var array
+     * @var User[]
      */
     public array $users = [];
 

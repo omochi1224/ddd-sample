@@ -89,6 +89,10 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'sql' => [
+            'enable' => env('LOG_SQL_ENABLE', false),
+        ],
     ],
 
 ];
