@@ -65,13 +65,13 @@ final class DummyUserRepository implements UserRepository
      */
     public function findByEmail(UserEmail $userEmail): ?User
     {
-        $users = array_map(
-            function (User $user) use ($userEmail): User {
+        $users = array_filter(
+            $this->users,
+            function (User $user) use ($userEmail) {
                 if ($user->getUserEmail()->equals($userEmail)) {
                     return $user;
                 }
-            },
-            $this->users
+            }
         );
 
         if (empty($users)) {
