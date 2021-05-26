@@ -7,6 +7,7 @@ namespace Auth\Presentation\Controllers;
 use App\Http\Controllers\Controller;
 use Auth\Application\UseCase\UserUseCase\UserFindUseCase;
 use Auth\Presentation\Requests\UserFindRequest;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Class UserFindController
@@ -33,11 +34,20 @@ final class UserFindController extends Controller
     }
 
     /**
+     *　ユーザ検索
+     * @group User
+     *
      * @param \Auth\Presentation\Requests\UserFindRequest $request
+     * @urlParam  users
+     * @response 200 {
+     *     "id":"UUID",
+     *     "name":"TestName",
+     *     "email":"test@example.com"
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(UserFindRequest $request)
+    public function __invoke(UserFindRequest $request): JsonResponse
     {
         $result = $this->useCase->invoke($request->id, $request->name, $request->email);
 

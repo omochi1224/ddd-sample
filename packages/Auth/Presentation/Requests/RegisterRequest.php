@@ -14,6 +14,10 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class RegisterRequest
  *
  * @package Auth\Presentation\Requests
+ * @bodyParam name required 名前 Example:testName
+ * @bodyParam email required メールアドレス Example:example@example.com
+ * @bodyParam password required パスワード Example:Passw0rd!
+ * @bodyParam password_confirmation required 確認用パスワード Example:Passw0rd!
  */
 final class RegisterRequest extends FormRequest implements Domainable
 {
@@ -24,7 +28,7 @@ final class RegisterRequest extends FormRequest implements Domainable
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -34,12 +38,39 @@ final class RegisterRequest extends FormRequest implements Domainable
      *
      * @return array<string, array<string>>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255',],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+    }
+
+    /**
+     * API仕様書で参照されるリクエスト
+     *
+     * @return string[][]
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'ユーザ名',
+                'example' => 'テスト名前',
+            ],
+            'email' => [
+                'description' => 'メールアドレス',
+                'example' => 'example@examp.com',
+            ],
+            'password' => [
+                'description' => 'パスワード',
+                'example' => 'Passw0rd!',
+            ],
+            'password_confirmation' => [
+                'description' => 'パスワード確認',
+                'example' => 'Passw0rd!',
+            ],
         ];
     }
 

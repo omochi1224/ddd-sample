@@ -34,9 +34,39 @@ final class RegisterController extends Controller
     }
 
     /**
+     * ユーザの登録
+     *
+     * @group User
+     *
      * @param \Auth\Presentation\Requests\RegisterRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse|string[]
+     * @urlParam  users
+     *
+     * @response 200 {
+     *     "id":"UUID",
+     *     "name":"TestName",
+     *     "email":"test@example.com"
+     * }
+     * @response status=422 scenario="Validation error" {
+     * "errors":{
+     *    "name":[
+     *      "The name field is required.",
+     *      "The name may not be greater than 255 characters."
+     *    ],
+     *    "email":[
+     *      "The email field is required.",
+     *      "The email must be a valid email address.",
+     *      "The name may not be greater than 255 characters."
+     *    ],
+     *    "password":[
+     *      "The name field is required.",
+     *      "The password must be at least 8 characters.",
+     *      "The password confirmation does not match."
+     *    ]
+     *  }
+     * }
+     *
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function __invoke(RegisterRequest $request)
@@ -48,6 +78,6 @@ final class RegisterController extends Controller
 
         /** @var \Auth\Domain\Models\User\User $user */
         $user = $result->getResultValue();
-        return UserFactory::toArray($user, ['password']);
+        return response()->json(UserFactory::toArray($user, ['password']));
     }
 }

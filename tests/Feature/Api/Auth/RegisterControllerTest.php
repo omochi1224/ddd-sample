@@ -18,7 +18,7 @@ final class RegisterControllerTest extends TestCase
         $requestData = [
             'name' => $this->faker->name,
             'email' => $this->faker->email,
-            'password' => $pass = $this->faker->password,
+            'password' => $pass = $this->faker->password(10),
             'password_confirmation' => $pass,
         ];
 
@@ -29,5 +29,20 @@ final class RegisterControllerTest extends TestCase
         unset($requestData['password_confirmation']);
 
         $response->assertJsonFragment($requestData);
+    }
+
+    public function test_バリデーションエラー()
+    {
+        $requestData = [
+            'name' => $this->faker->name,
+            'email' => 'error',
+            'password' => $pass = $this->faker->password(10),
+            'password_confirmation' => $pass,
+        ];
+
+        $response = $this->post(route('user.register'), $requestData);
+        $response->assertStatus(422);
+
+        $response->assertJsonFragment(['errors' => ['email' => ['The email must be a valid email address.']]]);
     }
 }

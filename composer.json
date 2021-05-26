@@ -14,8 +14,10 @@
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "2.7.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
+        "knuckleswtf/scribe": "^2.7",
         "laravel/ui": "^1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
@@ -63,16 +65,19 @@
             "@php artisan key:generate --ansi"
         ],
         "sniffer": [
-            "./vendor/bin/phpcs --standard=phpcs.xml ./"
+            "./vendor/bin/phpcs --standard=phpcs.xml ./packages/"
         ],
         "sniffer-rewrite": [
-            "./vendor/bin/phpcbf --standard=phpcs.xml ./"
+            "./vendor/bin/phpcbf --standard=phpcs.xml ./packages/"
         ],
         "sniffer-report-csv": [
-            "./vendor/bin/phpcs --standard=phpcs.xml --report=csv --report-file=./sniffer-reports/report.csv ./"
+            "./vendor/bin/phpcs --standard=phpcs.xml --report=csv --report-file=./sniffer-reports/report.csv ./packages/"
         ],
         "static-type-check": [
-            "vendor/bin/phpstan analyse -c phpstan.neon"
+            "./vendor/bin/phpstan analyse -c phpstan.neon"
+        ],
+        "document-generator": [
+            "@php artisan scribe:generate"
         ]
     }
 }

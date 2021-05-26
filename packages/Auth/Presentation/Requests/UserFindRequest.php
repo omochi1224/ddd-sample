@@ -11,6 +11,10 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class UserFindRequest
  *
  * @package Auth\Presentation\Requests
+ *
+ * @queryParam id ユーザID Example: 91849582-bdf9-11eb-8529-0242ac130003
+ * @queryParam name ユーザ名 Example: TestName
+ * @queryParam email メールアドレス Example: test@example.com
  */
 final class UserFindRequest extends FormRequest
 {
@@ -34,9 +38,9 @@ final class UserFindRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => ['string','uuid'],
             'name' => ['string', 'max:255',],
             'email' => ['string', 'email', 'max:255',],
-            'password' => ['string', 'min:8',],
         ];
     }
 }

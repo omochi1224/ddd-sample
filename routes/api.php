@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::POST('users', RegisterController::class)->name('user.register');
+
 Route::GET('users', UserFindController::class)->name('user.find');
