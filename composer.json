@@ -64,6 +64,9 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "test": [
+            "./vendor/bin/phpunit"
+        ],
         "sniffer": [
             "./vendor/bin/phpcs --standard=phpcs.xml ./packages/"
         ],
