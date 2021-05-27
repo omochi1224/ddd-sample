@@ -69,9 +69,9 @@ class AddFeature extends Command
         mkdir(self::PACKAGES_PATH . $this->packageName, 0755, true);
 
         $dirs = [
-            'Application' => ['Dto','UseCase'],
-            'Domain' => ['Exception', 'Models', 'Service'],
-            'Infrastructure' => ['Eloquent','QueryServices','Repositories']
+            'Application' => ['Dtos','UseCases'],
+            'Domain' => ['Exceptions', 'Models', 'Services'],
+            'Infrastructure' => ['Eloquents','QueryServices','Repositories']
         ];
 
         foreach ($dirs as $key => $dir) {
