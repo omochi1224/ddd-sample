@@ -13,31 +13,15 @@ use Illuminate\Hashing\BcryptHasher;
  *
  * @package Auth\Domain\Services
  */
-final class UserPasswordHasher
+interface UserPasswordHasher
 {
-    /**
-     * @var \Illuminate\Hashing\BcryptHasher
-     */
-    private BcryptHasher $hasher;
-
-    /**
-     * UserPasswordHasher constructor.
-     */
-    public function __construct()
-    {
-        $this->hasher = new BcryptHasher();
-    }
-
     /**
      * @param string                        $password
      * @param \Auth\Domain\Models\User\User $user
      *
      * @return boolean
      */
-    public function checkByUser(string $password, User $user): bool
-    {
-        return $this->check($password, $user->getUserPassword());
-    }
+    public function checkByUser(string $password, User $user): bool;
 
     /**
      * @param string                                            $password
@@ -45,18 +29,12 @@ final class UserPasswordHasher
      *
      * @return boolean
      */
-    public function check(string $password, UserPassword $hash): bool
-    {
-        return $this->hasher->check($password, $hash->value());
-    }
+    public function check(string $password, UserPassword $hash): bool;
 
     /**
      * @param string $password
      *
      * @return \Auth\Domain\Models\User\ValueObject\UserPassword
      */
-    public function make(string $password): UserPassword
-    {
-        return UserPassword::of($this->hasher->make($password));
-    }
+    public function make(string $password): UserPassword;
 }

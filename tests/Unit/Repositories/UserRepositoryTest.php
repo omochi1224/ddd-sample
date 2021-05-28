@@ -32,7 +32,7 @@ final class UserRepositoryTest extends TestCase
         self::assertEquals($dummyUserDomain->getUserEmail()->value(), $dbUser->email);
         self::assertEquals($dummyUserDomain->getUserName()->value(), $dbUser->name);
 
-        $hasher = new UserPasswordHasher();
+        $hasher = app(UserPasswordHasher::class);
         self::assertTrue($hasher->check('password', UserPassword::of($dbUser->password)));
     }
 

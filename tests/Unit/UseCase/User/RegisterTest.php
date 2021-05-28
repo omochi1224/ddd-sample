@@ -10,6 +10,8 @@ use Auth\Application\UseCase\UserUseCase\UserRegisterUseCase;
 use Auth\Domain\Models\User\User;
 use Auth\Domain\Models\User\UserFactory;
 use Auth\Domain\Models\User\UserRepository;
+use Auth\Domain\Models\User\ValueObject\UserPassword;
+use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Infrastructure\Eloquent\EloquentUser;
 use Tests\TestCase;
 
@@ -40,8 +42,7 @@ final class RegisterTest extends TestCase
 
         //リポジトリのモック
         $repositoryMock = \Mockery::mock(UserRepository::class);
-        $repositoryMock->shouldReceive('findById')
-        ->andReturn($userDomain);
+        $repositoryMock->shouldReceive('findById')->andReturn($userDomain);
         $this->app->instance(UserRepository::class, $repositoryMock);
 
         /** @var UserRegisterUseCase $useCase */
@@ -56,7 +57,6 @@ final class RegisterTest extends TestCase
 
     public function test_同じメールアドレスが登録されている場合()
     {
-
         /** @var \Auth\Domain\Models\User\User $userDomain */
         $userDomain = UserFactory::db(factory(EloquentUser::class)->make());
 
@@ -78,5 +78,36 @@ final class RegisterTest extends TestCase
 
         self::assertTrue($result->isError());
         self::assertEquals(UserUseCaseResultError::DUPLICATION_EMAIL, $result->getErrorCode());
+    }
+
+    public function test_パスワードが適切に暗号化されなかった場合エラーが返ってくることを確認()
+    {
+        $password = 'password';
+
+        //リポジトリのモック
+        $repositoryMock = \Mockery::mock(UserRepository::class);
+        $repositoryMock->shouldReceive('findById')->andReturn(null);
+        $repositoryMock->shouldReceive('findByEmail')->andReturn(null);
+        $this->app->instance(UserRepository::class, $repositoryMock);
+
+        //パスワード暗号化サービスのモック
+        $passwordHasher = \Mockery::mock(UserPasswordHasher::class);
+        $userPassword = UserPassword::of($password);
+        $passwordHasher->shouldReceive('make')->andReturn($userPassword);
+        $this->app->instance(UserPasswordHasher::class, $passwordHasher);
+
+
+        /** @var UserRegisterUseCase $useCase */
+        $useCase = app(UserRegisterUseCase::class);
+
+        $userDomain = UserFactory::db(factory(EloquentUser::class)->make(['password' => $password]));
+        //処理結果オブジェクト
+        $result = $useCase->invoke($userDomain);
+
+        //処理にエラーが有ることを確認
+        self::assertTrue($result->isError());
+
+        //パスワード暗号化にエラーが有ることを確認
+        self::assertEquals(UserUseCaseResultError::PASSWORD_ENCRYPT, $result->getErrorCode());
     }
 }

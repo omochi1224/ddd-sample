@@ -67,6 +67,9 @@
         "test": [
             "./vendor/bin/phpunit"
         ],
+        "test:coverage": [
+            "phpunit --coverage-html coverage"
+        ],
         "sniffer": [
             "./vendor/bin/phpcs --standard=phpcs.xml ./packages/"
         ],
@@ -81,6 +84,16 @@
         ],
         "document-generator": [
             "@php artisan scribe:generate"
+        ],
+        "cache:clear": [
+            "@php artisan cache:clear",
+            "@php artisan config:clear",
+            "@php artisan route:clear",
+            "@php artisan view:clear",
+            "@composer dump-autoload",
+            "@php artisan clear-compiled",
+            "@php artisan optimize",
+            "@php artisan config:cache"
         ]
     }
 }

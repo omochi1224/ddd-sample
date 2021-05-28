@@ -17,37 +17,33 @@ final class UserPassHasherTest extends TestCase
 {
     private string $password = 'paAssw0rd!';
 
-    protected function setUp(): void
-    {
-        $this->hasher = app(UserPasswordHasher::class);
-        parent::setUp();
-    }
-
     public function test_make()
     {
-        $userHashPassword = $this->hasher->make($this->password);
+        $hasher = app(UserPasswordHasher::class);
+        $userHashPassword = $hasher->make($this->password);
         self::assertNotEquals($this->password, $userHashPassword->value());
     }
 
     public function test_check()
     {
+        $hasher = app(UserPasswordHasher::class);
+
         //ハッシュ化パスワード
-        $password = ['password' => $this->hasher->make($this->password)->value()];
+        $password = ['password' => $hasher->make($this->password)->value()];
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
         $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->make($password));
-
-        self::assertTrue(
-            $this->hasher->check($this->password, $dummyUserDomain->getUserPassword())
-        );
+        self::assertTrue($hasher->check($this->password, $dummyUserDomain->getUserPassword()));
     }
 
     public function test_checkByUser()
     {
+        $hasher = app(UserPasswordHasher::class);
+
         //ハッシュ化パスワード
-        $password = ['password' => $this->hasher->make($this->password)->value()];
+        $password = ['password' => $hasher->make($this->password)->value()];
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
         $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->make($password));
 
-        self::assertTrue($this->hasher->checkByUser($this->password, $dummyUserDomain));
+        self::assertTrue($hasher->checkByUser($this->password, $dummyUserDomain));
     }
 }

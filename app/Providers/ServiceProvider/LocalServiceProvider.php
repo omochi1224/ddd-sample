@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers\ServiceProvider;
 
+use App\lib\Hash\LaravelUserPasswordHasher;
 use App\lib\Transaction\LaravelDbTransaction;
 use Auth\Domain\Models\User\UserQueryService;
 use Auth\Domain\Models\User\UserRepository;
+use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Infrastructure\QueryService\Eloquent\EloquentUserQueryService;
 use Auth\Infrastructure\Repositories\Eloquent\EloquentUserRepository;
 use Basic\Transaction\Transaction;
@@ -55,6 +57,7 @@ final class LocalServiceProvider implements Provider
     public function registerLibrary(): void
     {
         $this->app->bind(Transaction::class, LaravelDbTransaction::class);
+        $this->app->bind(UserPasswordHasher::class, LaravelUserPasswordHasher::class);
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\QueryService;
 
 use Auth\Domain\Models\User\UserFactory;
+use Auth\Domain\Models\User\ValueObject\UserId;
 use Auth\Infrastructure\Eloquent\EloquentUser;
 use Auth\Infrastructure\QueryService\Eloquent\EloquentUserQueryService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +18,6 @@ final class UserQueryServiceTest extends TestCase
     public function test_invoke()
     {
         $dummyUsers = factory(EloquentUser::class, 10)->create();
-
 
         /** @var \Auth\Domain\Models\User\User[] $dummyUserDomains */
         $dummyUserDomains = $dummyUsers->map(function ($user) {

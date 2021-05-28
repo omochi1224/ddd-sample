@@ -52,6 +52,29 @@ final class UserTest extends TestCase
         self::assertEquals($password, $user->getUserPassword()->value());
     }
 
+    public function test_変更メソッドのテスト()
+    {
+        $user = new User(
+            UserId::of($id = UserId::generate()),
+            UserName::of($name = $this->faker->userName),
+            UserEmail::of($email = $this->faker->email),
+            UserPassword::of($password = $this->faker->password)
+        );
+
+        $name = $this->faker->name;
+        $email = $this->faker->email;
+        $password = $this->faker->password;
+
+
+        $user->changeEmail(UserEmail::of($email));
+        $user->changeName(UserName::of($name));
+        $user->changePassword(UserPassword::of($password));
+
+        self::assertEquals($name, $user->getUserName()->value());
+        self::assertEquals($email, $user->getUserEmail()->value());
+        self::assertEquals($password, $user->getUserPassword()->value());
+    }
+
     public function test_request_factory_生成()
     {
         $request = new \stdClass();
