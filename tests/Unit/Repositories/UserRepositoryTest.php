@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Repositories;
 
+use Auth\Domain\Exception\UserNotFoundException;
 use Auth\Domain\Models\User\UserFactory;
+use Auth\Domain\Models\User\ValueObject\UserEmail;
+use Auth\Domain\Models\User\ValueObject\UserId;
 use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Infrastructure\Eloquent\EloquentUser;
 use Auth\Infrastructure\Repositories\Eloquent\EloquentUserRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 final class UserRepositoryTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     public function test_保存()
     {
@@ -49,6 +54,11 @@ final class UserRepositoryTest extends TestCase
         self::assertTrue($dummyUserDomain->getUserName()->equals($userDomain->getUserName()));
         self::assertTrue($dummyUserDomain->getUserEmail()->equals($userDomain->getUserEmail()));
         self::assertTrue($dummyUserDomain->getUserPassword()->equals($userDomain->getUserPassword()));
+
+        //存在しないユーザIDでの検索の場合はNullが返ってくることを確認
+        unset($userDomain);
+        $userDomain = $repository->findById(UserId::of(UserId::generate()));
+        self::assertNull($userDomain);
     }
 
     public function test_メールアドレスで検索()
@@ -64,6 +74,10 @@ final class UserRepositoryTest extends TestCase
         self::assertTrue($dummyUserDomain->getUserName()->equals($userDomain->getUserName()));
         self::assertTrue($dummyUserDomain->getUserEmail()->equals($userDomain->getUserEmail()));
         self::assertTrue($dummyUserDomain->getUserPassword()->equals($userDomain->getUserPassword()));
+
+        unset($userDomain);
+        $userDomain = $repository->findByEmail(UserEmail::of($this->faker->email));
+        self::assertNull($userDomain);
     }
 
     public function test_削除()
@@ -77,5 +91,9 @@ final class UserRepositoryTest extends TestCase
 
         $dbUser = $eloquent->where('id', $dummyUserDomain->getUserId()->value())->first();
         self::assertNull($dbUser);
+
+        //存在しないユーザを削除しようとすると例外が発生することを確認
+        $this->expectException(UserNotFoundException::class); //発生が想定される例外
+        $repository->delete(UserId::of(UserId::generate()));
     }
 }
