@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "4f0d016b-550d-447b-98f1-cd96fc722b43",
+        "_postman_id": "e7f0186c-435b-457e-bdc0-0f9bd580f98b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -32,7 +32,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "dolorem",
+                                    "value": "dolor",
                                     "description": ""
                                 }
                             ]
@@ -71,7 +71,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "dolorem",
+                                            "value": "dolor",
                                             "description": ""
                                         }
                                     ]
@@ -113,7 +113,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "dolorem",
+                                            "value": "dolor",
                                             "description": ""
                                         }
                                     ]
@@ -176,7 +176,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "impedit",
+                                    "value": "soluta",
                                     "description": ""
                                 }
                             ]
@@ -194,7 +194,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id\": \"veritatis\",\n    \"name\": \"vitae\",\n    \"email\": \"ywyman@example.org\"\n}"
+                            "raw": "{\n    \"id\": \"fugiat\",\n    \"name\": \"omnis\",\n    \"email\": \"flavio00@example.com\"\n}"
                         },
                         "description": "",
                         "auth": {
@@ -234,7 +234,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "impedit",
+                                            "value": "soluta",
                                             "description": ""
                                         }
                                     ]
@@ -252,7 +252,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"id\": \"veritatis\",\n    \"name\": \"vitae\",\n    \"email\": \"ywyman@example.org\"\n}"
+                                    "raw": "{\n    \"id\": \"fugiat\",\n    \"name\": \"omnis\",\n    \"email\": \"flavio00@example.com\"\n}"
                                 },
                                 "description": "",
                                 "auth": {
