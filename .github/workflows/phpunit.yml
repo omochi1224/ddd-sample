@@ -145,7 +145,7 @@ jobs:
         run: composer document-generator
       - name: 仕様書更新
         run: |
-          git config user.email "bot@bot.com"
+          git config user.email "tsuyokashi@gmail.com"
           git config user.name "API仕様書更新"
           git pull
           ls ./public/docs
@@ -180,7 +180,7 @@ jobs:
         run: composer test:coverage
       - name: 仕様書更新
         run: |
-          git config user.email "bot@bot.com"
+          git config user.email "tsuyokashi@gmail.com"
           git config user.name "カバレッジ一覧更新"
           git pull
           git add -f ./coverage
