@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "e7f0186c-435b-457e-bdc0-0f9bd580f98b",
+        "_postman_id": "8f76192f-236a-4d86-a54c-7cefe06b9e01",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -32,7 +32,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "dolor",
+                                    "value": "et",
                                     "description": ""
                                 }
                             ]
@@ -71,7 +71,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "dolor",
+                                            "value": "et",
                                             "description": ""
                                         }
                                     ]
@@ -113,7 +113,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "dolor",
+                                            "value": "et",
                                             "description": ""
                                         }
                                     ]
@@ -176,7 +176,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "soluta",
+                                    "value": "in",
                                     "description": ""
                                 }
                             ]
@@ -194,7 +194,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id\": \"fugiat\",\n    \"name\": \"omnis\",\n    \"email\": \"flavio00@example.com\"\n}"
+                            "raw": "{\n    \"id\": \"est\",\n    \"name\": \"sunt\",\n    \"email\": \"mann.marcellus@example.com\"\n}"
                         },
                         "description": "",
                         "auth": {
@@ -234,7 +234,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "soluta",
+                                            "value": "in",
                                             "description": ""
                                         }
                                     ]
@@ -252,7 +252,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"id\": \"fugiat\",\n    \"name\": \"omnis\",\n    \"email\": \"flavio00@example.com\"\n}"
+                                    "raw": "{\n    \"id\": \"est\",\n    \"name\": \"sunt\",\n    \"email\": \"mann.marcellus@example.com\"\n}"
                                 },
                                 "description": "",
                                 "auth": {
