@@ -1,24 +1,80 @@
-# User
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel Documentation</title>
 
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 
-## ユーザの登録
+        <link rel="stylesheet" href="css/style.css" media="screen" />
+        <link rel="stylesheet" href="css/print.css" media="print" />
+        <script src="js/all.js"></script>
 
+        <link rel="stylesheet" href="css/highlight-darcula.css" media="" />
+        <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
+</head>
 
+<body class="" data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+<a href="#" id="nav-button">
+      <span>
+        NAV
+            <img src="images/navbar.png" alt="-image" class=""/>
+      </span>
+</a>
+<div class="tocify-wrapper">
+                <div class="lang-selector">
+                            <a href="#" data-language-name="bash">bash</a>
+                            <a href="#" data-language-name="javascript">javascript</a>
+                    </div>
+        <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
 
-> Example request:
+    <ul id="toc">
+    </ul>
 
-```bash
-curl -X POST \
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="./collection.json">View Postman collection</a></li>
+                            <li><a href="./openapi.yaml">View OpenAPI (Swagger) spec</a></li>
+                            <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
+                    </ul>
+            <ul class="toc-footer" id="last-updated">
+            <li>Last updated: June 1 2021</li>
+        </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1>Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+<script>
+    var baseUrl = "http://localhost";
+</script>
+<script src="js/tryitout-2.7.3.js"></script>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://localhost</code></pre><h1>Authenticating requests</h1>
+<p>This API is not authenticated.</p><h1>User</h1>
+<h2>ユーザの登録</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
     "http://localhost/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"name":"testName","email":"example@example.com","password":"Passw0rd!","password_confirmation":"Passw0rd!"}'
-
-```
-
-```javascript
-const url = new URL(
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/users"
 );
 
@@ -38,23 +94,19 @@ fetch(url, {
     method: "POST",
     headers,
     body: JSON.stringify(body),
-}).then(response => response.json());
-```
-
-
-> Example response (200):
-
-```json
-{
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
     "id": "UUID",
     "name": "TestName",
     "email": "test@example.com"
-}
-```
-> Example response (422, Validation error):
-
-```json
-{
+}</code></pre>
+<blockquote>
+<p>Example response (422, Validation error):</p>
+</blockquote>
+<pre><code class="language-json">{
     "errors": {
         "name": [
             "The name field is required.",
@@ -71,8 +123,7 @@ fetch(url, {
             "The password confirmation does not match."
         ]
     }
-}
-```
+}</code></pre>
 <div id="execution-results-POSTapi-users" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-users"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-users"></code></pre>
@@ -126,26 +177,17 @@ fetch(url, {
 </p>
 
 </form>
-
-
-## 　ユーザ検索
-
-
-
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/users?id=91849582-bdf9-11eb-8529-0242ac130003&name=TestName&email=test%40example.com" \
+<h2>　ユーザ検索</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/users?id=91849582-bdf9-11eb-8529-0242ac130003&amp;name=TestName&amp;email=test%40example.com" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"id":"fuga","name":"laudantium","email":"bwolf@example.org"}'
-
-```
-
-```javascript
-const url = new URL(
+    -d '{"id":"fugiat","name":"omnis","email":"flavio00@example.com"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/users"
 );
 
@@ -155,7 +197,7 @@ let params = {
     "email": "test@example.com",
 };
 Object.keys(params)
-    .forEach(key => url.searchParams.append(key, params[key]));
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -163,28 +205,24 @@ let headers = {
 };
 
 let body = {
-    "id": "fuga",
-    "name": "laudantium",
-    "email": "bwolf@example.org"
+    "id": "fugiat",
+    "name": "omnis",
+    "email": "flavio00@example.com"
 }
 
 fetch(url, {
     method: "GET",
     headers,
     body: JSON.stringify(body),
-}).then(response => response.json());
-```
-
-
-> Example response (200):
-
-```json
-{
+}).then(response =&gt; response.json());</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
     "id": "UUID",
     "name": "TestName",
     "email": "test@example.com"
-}
-```
+}</code></pre>
 <div id="execution-results-GETapi-users" hidden>
     <blockquote>Received response<span id="execution-response-status-GETapi-users"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-GETapi-users"></code></pre>
@@ -251,6 +289,19 @@ The value must be a valid email address.
 </p>
 
 </form>
-
-
-
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+            </div>
+</div>
+<script>
+    $(function () {
+        var languages = ["bash","javascript"];
+        setupLanguages(languages);
+    });
+</script>
+</body>
+</html>
