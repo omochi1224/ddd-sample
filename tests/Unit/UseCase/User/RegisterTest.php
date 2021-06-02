@@ -22,7 +22,7 @@ final class RegisterTest extends TestCase
         $dummyUser = factory(EloquentUser::class)->make();
 
         /** @var \Auth\Domain\Models\User\User $userDomain */
-        $userDomain = UserFactory::db($dummyUser);
+        $userDomain = app(UserFactory::class)->db($dummyUser);
 
         /** @var UserRegisterUseCase $useCase */
         $useCase = app(UserRegisterUseCase::class);
@@ -38,7 +38,7 @@ final class RegisterTest extends TestCase
         $dummyUser = factory(EloquentUser::class)->make();
 
         /** @var \Auth\Domain\Models\User\User $userDomain */
-        $userDomain = UserFactory::db($dummyUser);
+        $userDomain = app(UserFactory::class)->db($dummyUser);
 
         //リポジトリのモック
         $repositoryMock = \Mockery::mock(UserRepository::class);
@@ -58,7 +58,7 @@ final class RegisterTest extends TestCase
     public function test_同じメールアドレスが登録されている場合()
     {
         /** @var \Auth\Domain\Models\User\User $userDomain */
-        $userDomain = UserFactory::db(factory(EloquentUser::class)->make());
+        $userDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->make());
 
         //リポジトリのモック
         $repositoryMock = \Mockery::mock(UserRepository::class);
@@ -67,7 +67,7 @@ final class RegisterTest extends TestCase
         $this->app->instance(UserRepository::class, $repositoryMock);
 
         /** @var \Auth\Domain\Models\User\User $newUserDomain */
-        $newUserDomain = UserFactory::db(factory(EloquentUser::class)->make(
+        $newUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->make(
             ['email' => $userDomain->getUserEmail()->value()]
         ));
 
@@ -100,7 +100,7 @@ final class RegisterTest extends TestCase
         /** @var UserRegisterUseCase $useCase */
         $useCase = app(UserRegisterUseCase::class);
 
-        $userDomain = UserFactory::db(factory(EloquentUser::class)->make(['password' => $password]));
+        $userDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->make(['password' => $password]));
         //処理結果オブジェクト
         $result = $useCase->invoke($userDomain);
 

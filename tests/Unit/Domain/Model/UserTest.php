@@ -12,6 +12,7 @@ use Auth\Domain\Models\User\ValueObject\UserName;
 use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Auth\Infrastructure\Eloquent\EloquentUser;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class UserTest extends TestCase
@@ -21,7 +22,7 @@ final class UserTest extends TestCase
     public function test_生成()
     {
         $user = new User(
-            UserId::of($id = UserId::generate()),
+            UserId::of($id = (string)Str::uuid()),
             UserName::of($name = $this->faker->userName),
             UserEmail::of($email = $this->faker->email),
             UserPassword::of($password = $this->faker->password)
@@ -55,7 +56,7 @@ final class UserTest extends TestCase
     public function test_変更メソッドのテスト()
     {
         $user = new User(
-            UserId::of($id = UserId::generate()),
+            UserId::of($id = (string)Str::uuid()),
             UserName::of($name = $this->faker->userName),
             UserEmail::of($email = $this->faker->email),
             UserPassword::of($password = $this->faker->password)
@@ -82,7 +83,8 @@ final class UserTest extends TestCase
         $request->email = $this->faker->email;
         $request->password = 'password';
 
-        $user = UserFactory::request($request);
+        $factory = app(UserFactory::class);
+        $user = $factory->request($request);
 
         self::assertInstanceOf(User::class, $user);
         self::assertEquals($request->name, $user->getUserName()->value());
@@ -94,7 +96,7 @@ final class UserTest extends TestCase
     {
 
         $eloquent = factory(EloquentUser::class)->make();
-        $user = UserFactory::request($eloquent);
+        $user = app(UserFactory::class)->request($eloquent);
 
         self::assertInstanceOf(User::class, $user);
         self::assertEquals($eloquent->name, $user->getUserName()->value());
@@ -110,9 +112,9 @@ final class UserTest extends TestCase
         $eloquent->email = $this->faker->email;
         $eloquent->password = 'password';
 
-        $user = UserFactory::request($eloquent);
+        $user = app(UserFactory::class)->request($eloquent);
 
-        $userArray = UserFactory::toArray($user);
+        $userArray = app(UserFactory::class)->toArray($user);
         self::assertIsArray($userArray);
         self::assertArrayHasKey('id', $userArray);
         self::assertArrayHasKey('name', $userArray);
@@ -120,7 +122,7 @@ final class UserTest extends TestCase
         self::assertArrayHasKey('password', $userArray);
 
 
-        $userArray = UserFactory::toArray($user, ['password']);
+        $userArray = app(UserFactory::class)->toArray($user);
         self::assertIsArray($userArray);
         self::assertArrayHasKey('id', $userArray);
         self::assertArrayHasKey('name', $userArray);

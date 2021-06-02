@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth\Application\UseCase\UserUseCase\UserRegisterUseCase;
 use Auth\Domain\Models\User\UserFactory;
 use Auth\Presentation\Requests\RegisterRequest;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Class RegisterController
@@ -24,13 +25,20 @@ final class RegisterController extends Controller
     private UserRegisterUseCase $useCase;
 
     /**
+     * @var \Auth\Domain\Models\User\UserFactory
+     */
+    private UserFactory $userFactory;
+
+    /**
      * RegisterController constructor.
      *
      * @param \Auth\Application\UseCase\UserUseCase\UserRegisterUseCase $useCase
+     * @param \Auth\Domain\Models\User\UserFactory                      $userFactory
      */
-    public function __construct(UserRegisterUseCase $useCase)
+    public function __construct(UserRegisterUseCase $useCase, UserFactory $userFactory)
     {
         $this->useCase = $useCase;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -69,7 +77,7 @@ final class RegisterController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function __invoke(RegisterRequest $request)
+    public function __invoke(RegisterRequest $request): JsonResponse
     {
         $result = $this->useCase->invoke($request->toDomain());
         if ($result->isError()) {
@@ -78,6 +86,6 @@ final class RegisterController extends Controller
 
         /** @var \Auth\Domain\Models\User\User $user */
         $user = $result->getResultValue();
-        return response()->json(UserFactory::toArray($user, ['password']));
+        return response()->json($this->userFactory->toArray($user, ['password']));
     }
 }

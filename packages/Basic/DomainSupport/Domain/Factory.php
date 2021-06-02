@@ -16,14 +16,14 @@ interface Factory
      *
      * @return \Basic\DomainSupport\Domain\Domain
      */
-    public static function request(object $object): Domain;
+    public function request(object $object): Domain;
 
     /**
      * @param object $object
      *
      * @return \Basic\DomainSupport\Domain\Domain
      */
-    public static function db(object $object): Domain;
+    public function db(object $object): Domain;
 
     /**
      * @param \Basic\DomainSupport\Domain\Domain $domain
@@ -31,5 +31,5 @@ interface Factory
      *
      * @return array<mixed>
      */
-    public static function toArray(Domain $domain, array $hiddenOption = []): array;
+    public function toArray(Domain $domain, array $hiddenOption = []): array;
 }

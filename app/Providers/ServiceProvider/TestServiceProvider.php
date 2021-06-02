@@ -6,11 +6,13 @@ namespace App\Providers\ServiceProvider;
 
 use App\lib\Hash\LaravelUserPasswordHasher;
 use App\lib\Transaction\LaravelDbTransaction;
+use App\lib\Uuid\LaravelUuid;
 use Auth\Domain\Models\User\UserQueryService;
 use Auth\Domain\Models\User\UserRepository;
 use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Infrastructure\QueryService\Dummy\DummyUserQueryService;
 use Auth\Infrastructure\Repositories\Dummy\DummyUserRepository;
+use Basic\DomainSupport\Domain\Uuid;
 use Basic\Transaction\Transaction;
 use Illuminate\Contracts\Foundation\Application;
 
@@ -60,6 +62,7 @@ final class TestServiceProvider implements Provider
     {
         $this->app->bind(Transaction::class, LaravelDbTransaction::class);
         $this->app->bind(UserPasswordHasher::class, LaravelUserPasswordHasher::class);
+        $this->app->bind(Uuid::class, LaravelUuid::class);
     }
 
     /**

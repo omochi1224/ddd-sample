@@ -12,6 +12,7 @@ use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Infrastructure\Eloquent\EloquentUser;
 use Auth\Infrastructure\Repositories\Eloquent\EloquentUserRepository;
+use Basic\DomainSupport\Domain\Uuid;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -26,9 +27,9 @@ final class UserRepositoryTest extends TestCase
         $eloquent = new EloquentUser();
 
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
-        $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->make());
+        $dummyUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->make());
 
-        $repository = new EloquentUserRepository($eloquent);
+        $repository = new EloquentUserRepository($eloquent, app(UserFactory::class));
         $repository->store($dummyUserDomain);
 
         $dbUser = $eloquent->where('id', $dummyUserDomain->getUserId()->value())->first();
@@ -44,10 +45,10 @@ final class UserRepositoryTest extends TestCase
     public function test_IDで検索()
     {
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
-        $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->create());
+        $dummyUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->create());
 
         $eloquent = new EloquentUser();
-        $repository = new EloquentUserRepository($eloquent);
+        $repository = new EloquentUserRepository($eloquent, app(UserFactory::class));
         $userDomain = $repository->findById($dummyUserDomain->getUserId());
 
         self::assertTrue($dummyUserDomain->getUserId()->equals($userDomain->getUserId()));
@@ -57,17 +58,18 @@ final class UserRepositoryTest extends TestCase
 
         //存在しないユーザIDでの検索の場合はNullが返ってくることを確認
         unset($userDomain);
-        $userDomain = $repository->findById(UserId::of(UserId::generate()));
+        $notFoundUserUuid = app(Uuid::class)->generate();
+        $userDomain = $repository->findById(UserId::of($notFoundUserUuid));
         self::assertNull($userDomain);
     }
 
     public function test_メールアドレスで検索()
     {
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
-        $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->create());
+        $dummyUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->create());
 
         $eloquent = new EloquentUser();
-        $repository = new EloquentUserRepository($eloquent);
+        $repository = new EloquentUserRepository($eloquent, app(UserFactory::class));
         $userDomain = $repository->findByEmail($dummyUserDomain->getUserEmail());
 
         self::assertTrue($dummyUserDomain->getUserId()->equals($userDomain->getUserId()));
@@ -83,10 +85,10 @@ final class UserRepositoryTest extends TestCase
     public function test_削除()
     {
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
-        $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->create());
+        $dummyUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->create());
 
         $eloquent = new EloquentUser();
-        $repository = new EloquentUserRepository($eloquent);
+        $repository = new EloquentUserRepository($eloquent, app(UserFactory::class));
         $repository->delete($dummyUserDomain->getUserId());
 
         $dbUser = $eloquent->where('id', $dummyUserDomain->getUserId()->value())->first();
@@ -94,6 +96,7 @@ final class UserRepositoryTest extends TestCase
 
         //存在しないユーザを削除しようとすると例外が発生することを確認
         $this->expectException(UserNotFoundException::class); //発生が想定される例外
-        $repository->delete(UserId::of(UserId::generate()));
+        $notFoundUserUuid = app(Uuid::class)->generate();
+        $repository->delete(UserId::of($notFoundUserUuid));
     }
 }

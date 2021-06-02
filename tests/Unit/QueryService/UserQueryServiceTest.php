@@ -21,7 +21,7 @@ final class UserQueryServiceTest extends TestCase
 
         /** @var \Auth\Domain\Models\User\User[] $dummyUserDomains */
         $dummyUserDomains = $dummyUsers->map(function ($user) {
-            return UserFactory::db($user);
+            return app(UserFactory::class)->db($user);
         });
 
         /** @var EloquentUserQueryService $queryService */

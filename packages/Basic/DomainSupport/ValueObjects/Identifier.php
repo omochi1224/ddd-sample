@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Basic\DomainSupport\ValueObjects;
 
+use Basic\DomainSupport\Exception\InvalidUuidException;
+
 /**
  * 識別子オブジェクト
  *
@@ -14,28 +16,22 @@ namespace Basic\DomainSupport\ValueObjects;
 abstract class Identifier extends StringValueObject
 {
     /**
-     * 生成パターン
+     * @var string
      */
-    const PATTERN = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+    private string $pattern = '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
 
     /**
-     * UUID 生成
+     * Identifier constructor.
      *
-     * @return string
-     * @throws \Exception
+     * @param string $uuid
+     *
+     * @throws \Basic\DomainSupport\Exception\InvalidUuidException
      */
-    public static function generate(): string
+    public function __construct(string $uuid)
     {
-        $chars = str_split(self::PATTERN);
-
-        foreach ($chars as $i => $char) {
-            if ($char === 'x') {
-                $chars[$i] = dechex(random_int(0, 15));
-            } elseif ($char === 'y') {
-                $chars[$i] = dechex(random_int(8, 11));
-            }
+        if (preg_match($this->pattern, $uuid) !== 1) {
+            throw new InvalidUuidException();
         }
-
-        return implode('', $chars);
+        $this->value = $uuid;
     }
 }

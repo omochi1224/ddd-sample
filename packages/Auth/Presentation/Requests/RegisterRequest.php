@@ -80,8 +80,10 @@ final class RegisterRequest extends FormRequest implements Domainable
      */
     public function toDomain(): User
     {
+        /** @var UserFactory $factory */
+        $factory = app(UserFactory::class);
         /** @var User $user */
-        $user = UserFactory::request($this);
+        $user = $factory->request($this);
         return $user;
     }
 }

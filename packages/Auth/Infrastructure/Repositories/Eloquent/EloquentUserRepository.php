@@ -26,13 +26,19 @@ final class EloquentUserRepository implements UserRepository
     private EloquentUser $eloquentUser;
 
     /**
+     * @var \Auth\Domain\Models\User\UserFactory
+     */
+    private UserFactory $userFactory;
+
+    /**
      * EloquentUserRepository constructor.
      *
      * @param \Auth\Infrastructure\Eloquent\EloquentUser $eloquentUser
      */
-    public function __construct(EloquentUser $eloquentUser)
+    public function __construct(EloquentUser $eloquentUser, UserFactory $userFactory)
     {
         $this->eloquentUser = $eloquentUser;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -42,7 +48,7 @@ final class EloquentUserRepository implements UserRepository
     public function store(User $user): void
     {
         $this->eloquentUser
-            ->fill(UserFactory::toArray($user))
+            ->fill($this->userFactory->toArray($user))
             ->save();
     }
 
@@ -61,7 +67,7 @@ final class EloquentUserRepository implements UserRepository
         }
 
         /** @var User $domain */
-        $domain = UserFactory::db($user);
+        $domain = $this->userFactory->db($user);
         return $domain;
     }
 
@@ -99,7 +105,7 @@ final class EloquentUserRepository implements UserRepository
         }
 
         /** @var User $domain */
-        $domain = UserFactory::db($user);
+        $domain = $this->userFactory->db($user);
         return $domain;
     }
 }

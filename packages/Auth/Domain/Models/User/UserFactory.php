@@ -10,6 +10,7 @@ use Auth\Domain\Models\User\ValueObject\UserName;
 use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Basic\DomainSupport\Domain\Domain;
 use Basic\DomainSupport\Domain\Factory;
+use Basic\DomainSupport\Domain\Uuid;
 
 /**
  * Class UserFactory
@@ -19,14 +20,29 @@ use Basic\DomainSupport\Domain\Factory;
 final class UserFactory implements Factory
 {
     /**
+     * @var \Basic\DomainSupport\Domain\Uuid
+     */
+    private Uuid $uuid;
+
+    /**
+     * UserFactory constructor.
+     *
+     * @param \Basic\DomainSupport\Domain\Uuid $uuid
+     */
+    public function __construct(Uuid $uuid)
+    {
+        $this->uuid = $uuid;
+    }
+
+    /**
      * @param object $object
      *
      * @return \Basic\DomainSupport\Domain\Domain
      * @throws \Exception
      */
-    public static function request(object $object): Domain
+    public function request(object $object): Domain
     {
-        $object->id = UserId::generate();
+        $object->id =  $this->uuid->generate();
         return new User(
             UserId::of($object->id),
             UserName::of($object->name),
@@ -40,7 +56,7 @@ final class UserFactory implements Factory
      *
      * @return \Basic\DomainSupport\Domain\Domain
      */
-    public static function db(object $object): Domain
+    public function db(object $object): Domain
     {
         return new User(
             UserId::of($object->id),
@@ -56,7 +72,7 @@ final class UserFactory implements Factory
      *
      * @return array<string, string>
      */
-    public static function toArray(Domain $domain, array $hiddenOption = []): array
+    public function toArray(Domain $domain, array $hiddenOption = []): array
     {
         $array = [
             'id' => $domain->getUserId()->value(),

@@ -31,7 +31,7 @@ final class UserPassHasherTest extends TestCase
         //ハッシュ化パスワード
         $password = ['password' => $hasher->make($this->password)->value()];
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
-        $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->make($password));
+        $dummyUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->make($password));
         self::assertTrue($hasher->check($this->password, $dummyUserDomain->getUserPassword()));
     }
 
@@ -42,7 +42,7 @@ final class UserPassHasherTest extends TestCase
         //ハッシュ化パスワード
         $password = ['password' => $hasher->make($this->password)->value()];
         /** @var \Auth\Domain\Models\User\User $dummyUserDomain */
-        $dummyUserDomain = UserFactory::db(factory(EloquentUser::class)->make($password));
+        $dummyUserDomain = app(UserFactory::class)->db(factory(EloquentUser::class)->make($password));
 
         self::assertTrue($hasher->checkByUser($this->password, $dummyUserDomain));
     }

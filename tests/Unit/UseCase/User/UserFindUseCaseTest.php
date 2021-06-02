@@ -12,6 +12,7 @@ use Auth\Domain\Models\User\UserQueryService;
 use Auth\Domain\Models\User\UserRepository;
 use Auth\Domain\Models\User\ValueObject\UserId;
 use Auth\Infrastructure\Eloquent\EloquentUser;
+use Basic\DomainSupport\Domain\Uuid;
 use Tests\TestCase;
 
 final class UserFindUseCaseTest extends TestCase
@@ -47,7 +48,7 @@ final class UserFindUseCaseTest extends TestCase
         /** @var UserFindUseCase $useCase */
         $useCase = app(UserFindUseCase::class);
 
-        $result = $useCase->invoke(UserId::generate());
+        $result = $useCase->invoke(app(Uuid::class)->generate());
 
         //処理にエラーになることを確認
         self::assertTrue($result->isError());
