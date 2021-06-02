@@ -34,6 +34,7 @@ final class EloquentUserRepository implements UserRepository
      * EloquentUserRepository constructor.
      *
      * @param \Auth\Infrastructure\Eloquent\EloquentUser $eloquentUser
+     * @param \Auth\Domain\Models\User\UserFactory       $userFactory
      */
     public function __construct(EloquentUser $eloquentUser, UserFactory $userFactory)
     {
