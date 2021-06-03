@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0"
@@ -16,13 +16,13 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.7.0",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
+        "fakerphp/faker": "^1.9.1",
         "knuckleswtf/scribe": "^2.7",
         "laravel/ui": "^1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpstan/phpstan": "^0.12.88",
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.5.3",
         "squizlabs/php_codesniffer": "^3.6"
     },
     "config": {
