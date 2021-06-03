@@ -152,15 +152,15 @@ paths:
                                 id:
                                     type: string
                                     description: ''
-                                    example: est
+                                    example: aliquid
                                 name:
                                     type: string
                                     description: ''
-                                    example: sunt
+                                    example: non
                                 email:
                                     type: string
                                     description: 'The value must be a valid email address.'
-                                    example: mann.marcellus@example.com
+                                    example: leda.heidenreich@example.org
             security: []
         parameters:
             -
@@ -176,4 +176,4 @@ paths:
                         value: ''
                     present:
                         summary: 'When the value is present'
-                        value: et
+                        value: veritatis
