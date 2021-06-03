@@ -8,7 +8,7 @@ DDD（オニオンアーキテクチャ、CQRS)を導入したLaravel
 
 # Requirement
 
-* PHP 7.4
+* PHP 8
 
 # Usage
 
