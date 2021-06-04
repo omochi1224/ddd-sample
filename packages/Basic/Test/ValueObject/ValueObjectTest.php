@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Basic\Test\ValueObject;
 
 use Basic\DomainSupport\Exception\InvariantException;
+use Basic\DomainSupport\ValueObjects\Enum;
 use Basic\DomainSupport\ValueObjects\PositiveNumber;
 use Basic\DomainSupport\ValueObjects\StringValueObject;
 use Tests\TestCase;
@@ -37,6 +38,16 @@ final class ValueObjectTest extends TestCase
         $this->expectException(InvariantException::class);
         $poNum = ConcretePositiveNumberValueObject::of($number);
     }
+
+    /**
+     * @test
+     */
+    public function 列挙型でオブジェクト生成()
+    {
+        $spade = ConcreteEnum::SPADE();
+        self::assertIsObject($spade);
+        self::assertEquals(ConcreteEnum::SPADE, ConcreteEnum::SPADE()->value());
+    }
 }
 
 class ConcreteStringValueObject extends StringValueObject
@@ -47,4 +58,9 @@ class ConcreteStringValueObject extends StringValueObject
 class ConcretePositiveNumberValueObject extends PositiveNumber
 {
 
+}
+
+class ConcreteEnum extends Enum
+{
+    const SPADE = 'spade';
 }
