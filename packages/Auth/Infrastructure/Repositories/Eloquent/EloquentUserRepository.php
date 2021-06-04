@@ -21,25 +21,13 @@ use Auth\Infrastructure\Eloquent\EloquentUser;
 final class EloquentUserRepository implements UserRepository
 {
     /**
-     * @var \Auth\Infrastructure\Eloquent\EloquentUser
-     */
-    private EloquentUser $eloquentUser;
-
-    /**
-     * @var \Auth\Domain\Models\User\UserFactory
-     */
-    private UserFactory $userFactory;
-
-    /**
      * EloquentUserRepository constructor.
      *
      * @param \Auth\Infrastructure\Eloquent\EloquentUser $eloquentUser
      * @param \Auth\Domain\Models\User\UserFactory       $userFactory
      */
-    public function __construct(EloquentUser $eloquentUser, UserFactory $userFactory)
+    public function __construct(private EloquentUser $eloquentUser, private UserFactory $userFactory)
     {
-        $this->eloquentUser = $eloquentUser;
-        $this->userFactory = $userFactory;
     }
 
     /**
@@ -67,9 +55,7 @@ final class EloquentUserRepository implements UserRepository
             return null;
         }
 
-        /** @var User $domain */
-        $domain = $this->userFactory->db($user);
-        return $domain;
+        return $this->userFactory->db($user);
     }
 
     /**
@@ -105,8 +91,6 @@ final class EloquentUserRepository implements UserRepository
             return null;
         }
 
-        /** @var User $domain */
-        $domain = $this->userFactory->db($user);
-        return $domain;
+        return $this->userFactory->db($user);
     }
 }

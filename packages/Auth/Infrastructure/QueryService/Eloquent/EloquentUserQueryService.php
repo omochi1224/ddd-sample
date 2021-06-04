@@ -16,18 +16,12 @@ use Auth\Infrastructure\Eloquent\EloquentUser;
 final class EloquentUserQueryService implements UserQueryService
 {
     /**
-     * @var \Auth\Infrastructure\Eloquent\EloquentUser
-     */
-    private EloquentUser $eloquentUser;
-
-    /**
      * EloquentUserQueryService constructor.
      *
      * @param \Auth\Infrastructure\Eloquent\EloquentUser $eloquentUser
      */
-    public function __construct(EloquentUser $eloquentUser)
+    public function __construct(private EloquentUser $eloquentUser)
     {
-        $this->eloquentUser = $eloquentUser;
     }
 
     /**

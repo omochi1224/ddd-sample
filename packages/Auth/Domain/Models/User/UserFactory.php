@@ -20,27 +20,21 @@ use Basic\DomainSupport\Domain\Uuid;
 final class UserFactory implements Factory
 {
     /**
-     * @var \Basic\DomainSupport\Domain\Uuid
-     */
-    private Uuid $uuid;
-
-    /**
      * UserFactory constructor.
      *
      * @param \Basic\DomainSupport\Domain\Uuid $uuid
      */
-    public function __construct(Uuid $uuid)
+    public function __construct(private Uuid $uuid)
     {
-        $this->uuid = $uuid;
     }
 
     /**
      * @param object $object
      *
-     * @return \Basic\DomainSupport\Domain\Domain
+     * @return \Auth\Domain\Models\User\User
      * @throws \Exception
      */
-    public function request(object $object): Domain
+    public function request(object $object): User
     {
         $object->id =  $this->uuid->generate();
         return new User(
@@ -54,9 +48,9 @@ final class UserFactory implements Factory
     /**
      * @param object $object
      *
-     * @return \Basic\DomainSupport\Domain\Domain
+     * @return \Auth\Domain\Models\User\User
      */
-    public function db(object $object): Domain
+    public function db(object $object): User
     {
         return new User(
             UserId::of($object->id),
@@ -81,7 +75,7 @@ final class UserFactory implements Factory
             'password' => $domain->getUserPassword()->value(),
         ];
 
-        if (!empty($hiddenOption)) {
+        if (count($hiddenOption) !== 0) {
             return array_filter(
                 $array,
                 function ($value, string $key) use ($hiddenOption) {

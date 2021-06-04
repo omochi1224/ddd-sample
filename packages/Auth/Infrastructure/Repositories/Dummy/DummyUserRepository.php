@@ -74,7 +74,7 @@ final class DummyUserRepository implements UserRepository
             }
         );
 
-        if (empty($users)) {
+        if (count($users) === 0) {
             return null;
         }
 
