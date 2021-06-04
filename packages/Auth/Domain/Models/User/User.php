@@ -26,26 +26,6 @@ final class User extends Domain
     use Getter;
 
     /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserId
-     */
-    private UserId $userId;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserName
-     */
-    private UserName $userName;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserEmail
-     */
-    private UserEmail $userEmail;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserPassword
-     */
-    private UserPassword $userPassword;
-
-    /**
      * User constructor.
      *
      * @param \Auth\Domain\Models\User\ValueObject\UserId       $userId
@@ -53,12 +33,12 @@ final class User extends Domain
      * @param \Auth\Domain\Models\User\ValueObject\UserEmail    $userEmail
      * @param \Auth\Domain\Models\User\ValueObject\UserPassword $userPassword
      */
-    public function __construct(UserId $userId, UserName $userName, UserEmail $userEmail, UserPassword $userPassword)
-    {
-        $this->userId = $userId;
-        $this->userName = $userName;
-        $this->userEmail = $userEmail;
-        $this->userPassword = $userPassword;
+    public function __construct(
+        private UserId $userId,
+        private UserName $userName,
+        private UserEmail $userEmail,
+        private UserPassword $userPassword
+    ) {
     }
 
     /**

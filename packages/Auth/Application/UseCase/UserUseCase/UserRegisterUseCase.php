@@ -19,21 +19,6 @@ use Basic\Transaction\Transaction;
 final class UserRegisterUseCase
 {
     /**
-     * @var \Auth\Domain\Models\User\UserRepository
-     */
-    private UserRepository $userRepository;
-
-    /**
-     * @var \Basic\Transaction\Transaction
-     */
-    private Transaction $transaction;
-
-    /**
-     * @var \Auth\Domain\Services\UserPasswordHasher
-     */
-    private UserPasswordHasher $userPasswordHasher;
-
-    /**
      * UserRegisterUseCase constructor.
      *
      * @param \Auth\Domain\Models\User\UserRepository  $userRepository
@@ -41,13 +26,10 @@ final class UserRegisterUseCase
      * @param \Auth\Domain\Services\UserPasswordHasher $userPasswordHasher
      */
     public function __construct(
-        UserRepository $userRepository,
-        Transaction $transaction,
-        UserPasswordHasher $userPasswordHasher
+        private UserRepository $userRepository,
+        private Transaction $transaction,
+        private UserPasswordHasher $userPasswordHasher
     ) {
-        $this->userRepository = $userRepository;
-        $this->transaction = $transaction;
-        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     /**

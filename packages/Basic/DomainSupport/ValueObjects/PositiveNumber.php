@@ -37,7 +37,7 @@ abstract class PositiveNumber
      * @return static
      * @throws \Basic\DomainSupport\Exception\InvariantException
      */
-    public static function of(int $value = 0)
+    public static function of(int $value = 0): static
     {
         return new static($value);
     }
