@@ -20,7 +20,7 @@ use Basic\DomainSupport\Domain\Getter;
  * @method UserPassword getUserPassword()
  * @package Auth\Domain\Models\User
  */
-final class User extends Domain
+final class User implements Domain
 {
     /** 動的Getter */
     use Getter;

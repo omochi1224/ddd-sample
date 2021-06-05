@@ -11,6 +11,7 @@ use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Basic\DomainSupport\Domain\Domain;
 use Basic\DomainSupport\Domain\Factory;
 use Basic\DomainSupport\Domain\Uuid;
+use Basic\LoggerSupport\Logger;
 
 /**
  * Class UserFactory
@@ -75,18 +76,14 @@ final class UserFactory implements Factory
             'password' => $domain->getUserPassword()->value(),
         ];
 
-        if (count($hiddenOption) !== 0) {
-            return array_filter(
-                $array,
-                function ($value, string $key) use ($hiddenOption) {
-                    foreach ($hiddenOption as $option) {
-                        return $option !== $key;
-                    }
-                },
-                ARRAY_FILTER_USE_BOTH
-            );
-        }
-
-        return $array;
+        return $hiddenOption !== [] ? array_filter(
+            $array,
+            function ($value, string $key) use ($hiddenOption) {
+                foreach ($hiddenOption as $option) {
+                    return $option !== $key;
+                }
+            },
+            ARRAY_FILTER_USE_BOTH
+        ) : $array;
     }
 }

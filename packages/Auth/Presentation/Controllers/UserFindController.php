@@ -5,8 +5,13 @@ declare(strict_types=1);
 namespace Auth\Presentation\Controllers;
 
 use App\Http\Controllers\Controller;
+use Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResultError;
 use Auth\Application\UseCase\UserUseCase\UserFindUseCase;
 use Auth\Presentation\Requests\UserFindRequest;
+use Auth\Presentation\Response\Errors\DuplicationEmailErrorResponseException;
+use Auth\Presentation\Response\Errors\DuplicationIdErrorResponseException;
+use Auth\Presentation\Response\Errors\NotFoundErrorResponseException;
+use Basic\ExceptionSupport\BaseErrorResponseException;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -16,8 +21,6 @@ use Illuminate\Http\JsonResponse;
  */
 final class UserFindController extends Controller
 {
-    use ErrorResponse;
-
     /**
      * @var \Auth\Application\UseCase\UserUseCase\UserFindUseCase
      */
@@ -50,11 +53,14 @@ final class UserFindController extends Controller
     public function __invoke(UserFindRequest $request): JsonResponse
     {
         $result = $this->useCase->invoke($request->id, $request->name, $request->email);
-
         if ($result->isError()) {
-            return $this->errorResponse($result->getErrorCode());
+            match ($result->getErrorCode()) {
+                default => throw new BaseErrorResponseException(),
+                UserUseCaseResultError::NOT_FOUND => throw new NotFoundErrorResponseException(),
+                UserUseCaseResultError::DUPLICATION_ID => throw new DuplicationIdErrorResponseException(),
+                UserUseCaseResultError::DUPLICATION_EMAIL => throw new DuplicationEmailErrorResponseException(),
+            };
         }
-
         return response()->json((array)$result->getResultValue());
     }
 }

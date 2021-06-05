@@ -16,45 +16,44 @@ DDD（オニオンアーキテクチャ、CQRS)を導入したLaravel
 git clone https://github.com/omochi1224/ddd-sample.git
 cd ddd-sample
 cp .env.example .env
-touch database/database.sqlite
-composer install -vvv
-php artisan key:generate
-php artisan serve
+docker-compose up -d
+docker-compose exec php composer install -vvv
+docker-compose exec php php artisan key:generate
 ```
 
 新規機能(パッケージ)追加
 ```bash
-php artisan make:feature
+docker-compose php php artisan make:feature
 ```
 
 すべてのテスト実行
 ```bash
-composer test
+docker-compose php composer test
 ```
 
 コードが整形リスト
 ```bash
-composer sniffer
+docker-compose php composer sniffer
 ```
 
 コードが整形リストCSV
 ```bash
-composer sniffer-report-csv
+docker-compose php composer sniffer-report-csv
 ```
 
 コード整形
 ```bash
-composer sniffer-rewrite
+docker-compose php composer sniffer-rewrite
 ```
 
 静的解析
 ```bash
-composer static-type-check
+docker-compose php composer static-type-check
 ```
 
 API仕様書出力
 ```bash
-composer document-generator
+docker-compose php composer document-generator
 ```
 
 

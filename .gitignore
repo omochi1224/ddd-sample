@@ -15,3 +15,5 @@ yarn-error.log
 .idea
 .vscode
 .docker/infrastructure/local/db/data
+.docker/infrastructure/local/minio/config
+.docker/infrastructure/local/minio/data

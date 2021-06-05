@@ -19,11 +19,11 @@ use Basic\Transaction\Transaction;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
- * Class LocalServiceProvider
+ * Class ProductionServiceProvider
  *
  * @package App\Providers\ServiceProvider
  */
-final class LocalServiceProvider implements Provider
+final class StagingServiceProvider implements Provider
 {
     /**
      * @var Application
