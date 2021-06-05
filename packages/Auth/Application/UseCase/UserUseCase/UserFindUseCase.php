@@ -43,7 +43,7 @@ final class UserFindUseCase
             $queryData
         );
 
-        if (count($array) === 0) {
+        if ($array === []) {
             return UserUseCaseResult::fail(UserUseCaseResultError::NOT_FOUND());
         }
 
