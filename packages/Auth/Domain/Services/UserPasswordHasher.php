@@ -6,7 +6,6 @@ namespace Auth\Domain\Services;
 
 use Auth\Domain\Models\User\User;
 use Auth\Domain\Models\User\ValueObject\UserPassword;
-use Illuminate\Hashing\BcryptHasher;
 
 /**
  * Class UserPasswordHasher

@@ -38,11 +38,13 @@ final class UserFindController extends Controller
 
     /**
      *　ユーザ検索
-     * @group User
+     *
+     * @group     User
      *
      * @param \Auth\Presentation\Requests\UserFindRequest $request
+     *
      * @urlParam  users
-     * @response 200 {
+     * @response  200 {
      *     "id":"UUID",
      *     "name":"TestName",
      *     "email":"test@example.com"

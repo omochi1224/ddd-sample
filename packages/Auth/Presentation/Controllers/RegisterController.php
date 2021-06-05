@@ -47,18 +47,18 @@ final class RegisterController extends Controller
     /**
      * ユーザの登録
      *
-     * @group User
+     * @group     User
      *
      * @param \Auth\Presentation\Requests\RegisterRequest $request
      *
      * @urlParam  users
      *
-     * @response 200 {
+     * @response  200 {
      *     "id":"UUID",
      *     "name":"TestName",
      *     "email":"test@example.com"
      * }
-     * @response status=422 scenario="Validation error" {
+     * @response  status=422 scenario="Validation error" {
      * "errors":{
      *    "name":[
      *      "The name field is required.",
@@ -77,7 +77,7 @@ final class RegisterController extends Controller
      *  }
      * }
      *
-     * @response status=409 scenario="Validation error" {
+     * @response  status=409 scenario="Validation error" {
      * "errors":{
      *    "name":[
      *      "The name field is required.",

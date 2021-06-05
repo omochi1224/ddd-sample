@@ -11,7 +11,6 @@ use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Basic\DomainSupport\Domain\Domain;
 use Basic\DomainSupport\Domain\Factory;
 use Basic\DomainSupport\Domain\Uuid;
-use Basic\LoggerSupport\Logger;
 
 /**
  * Class UserFactory
@@ -37,7 +36,7 @@ final class UserFactory implements Factory
      */
     public function request(object $object): User
     {
-        $object->id =  $this->uuid->generate();
+        $object->id = $this->uuid->generate();
         return new User(
             UserId::of($object->id),
             UserName::of($object->name),

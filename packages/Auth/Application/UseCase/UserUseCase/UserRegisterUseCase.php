@@ -25,6 +25,7 @@ final class UserRegisterUseCase
      * @param \Auth\Domain\Models\User\UserRepository  $userRepository
      * @param \Basic\Transaction\Transaction           $transaction
      * @param \Auth\Domain\Services\UserPasswordHasher $userPasswordHasher
+     * @param \Auth\Domain\Services\UserService        $userService
      */
     public function __construct(
         private UserRepository $userRepository,
@@ -43,7 +44,6 @@ final class UserRegisterUseCase
     {
         return $this->transaction->scope(
             function () use ($user): UserUseCaseResult {
-
                 //重複チェック
                 if ($this->userService->isDuplicated($user)) {
                     return UserUseCaseResult::fail(UserUseCaseResultError::DUPLICATION_EMAIL());

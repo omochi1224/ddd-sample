@@ -13,7 +13,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class RegisterRequest
  *
- * @package Auth\Presentation\Requests
+ * @package   Auth\Presentation\Requests
  * @bodyParam name required 名前 Example:testName
  * @bodyParam email required メールアドレス Example:example@example.com
  * @bodyParam password required パスワード Example:Passw0rd!

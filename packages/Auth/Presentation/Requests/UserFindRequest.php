@@ -14,7 +14,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @queryParam name ユーザ名 Example: TestName
  * @queryParam email メールアドレス Example: test@example.com
  *
- * @package Auth\Presentation\Requests
+ * @package    Auth\Presentation\Requests
  */
 final class UserFindRequest extends FormRequest
 {
@@ -38,7 +38,7 @@ final class UserFindRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['string','uuid'],
+            'id' => ['string', 'uuid'],
             'name' => ['string', 'max:255',],
             'email' => ['string', 'email', 'max:255',],
         ];

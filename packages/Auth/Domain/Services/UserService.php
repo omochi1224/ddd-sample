@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Auth\Domain\Services;
 
-
 use Auth\Domain\Exception\UserIdDuplicationException;
 use Auth\Domain\Exception\UserPasswordHaherException;
 use Auth\Domain\Models\User\User;
@@ -34,7 +33,7 @@ final class UserService
      *
      * @param \Auth\Domain\Models\User\User $user
      *
-     * @return bool
+     * @return boolean
      * @throws \Auth\Domain\Exception\UserIdDuplicationException
      */
     public function isDuplicated(User $user): bool
@@ -67,5 +66,4 @@ final class UserService
         $user->changePassword($encryptionUserPassword);
         return $user;
     }
-
 }

@@ -24,6 +24,7 @@ final class DummyUserRepository implements UserRepository
 
     /**
      * @param \Auth\Domain\Models\User\User $user
+     *
      * @return void
      */
     public function store(User $user): void
@@ -47,8 +48,8 @@ final class DummyUserRepository implements UserRepository
     /**
      * @param \Auth\Domain\Models\User\ValueObject\UserId $userId
      *
-     * @throws \Auth\Domain\Exception\UserNotFoundException
      * @return void
+     * @throws \Auth\Domain\Exception\UserNotFoundException
      */
     public function delete(UserId $userId): void
     {

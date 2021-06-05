@@ -16,6 +16,7 @@ interface UserRepository
 {
     /**
      * @param \Auth\Domain\Models\User\User $user
+     *
      * @return void
      */
     public function store(User $user): void;

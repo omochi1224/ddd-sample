@@ -11,7 +11,7 @@ use Basic\UseCaseSupport\UseCaseError;
  * @method static DUPLICATION_ID()
  * @method static DUPLICATION_EMAIL()
  * @method static PASSWORD_ENCRYPT()
- * @method static DUPLICATION() 
+ * @method static DUPLICATION()
  */
 final class UserUseCaseResultError extends UseCaseError
 {
@@ -19,5 +19,4 @@ final class UserUseCaseResultError extends UseCaseError
     const DUPLICATION_ID = 1;
     const DUPLICATION_EMAIL = 2;
     const PASSWORD_ENCRYPT = 3;
-    const DUPLICATION = 5;
 }

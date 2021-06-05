@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Auth\Presentation\Response\Errors;
 
-
 use Basic\ExceptionSupport\BaseErrorResponseException;
 use Illuminate\Http\JsonResponse;
 
