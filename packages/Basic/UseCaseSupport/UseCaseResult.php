@@ -14,11 +14,6 @@ use Basic\DomainSupport\ValueObjects\Enum;
 abstract class UseCaseResult
 {
     /**
-     * @var object|null
-     */
-    private ?object $resultValue;
-
-    /**
      * @var integer|null
      */
     private ?int $errorCode;
@@ -29,9 +24,8 @@ abstract class UseCaseResult
      * @param object|null                                 $resultValue
      * @param \Basic\DomainSupport\ValueObjects\Enum|null $errorCode
      */
-    public function __construct(?object $resultValue, ?Enum $errorCode)
+    public function __construct(private ?object $resultValue, ?Enum $errorCode)
     {
-        $this->resultValue = $resultValue;
         $this->errorCode = $errorCode?->value();
     }
 
