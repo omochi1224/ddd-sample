@@ -44,7 +44,7 @@ final class UserFindUseCase
         );
 
         if (count($array) === 0) {
-            return UserUseCaseResult::fail(UserUseCaseResultError::NOT_FOUND);
+            return UserUseCaseResult::fail(UserUseCaseResultError::NOT_FOUND());
         }
 
         return UserUseCaseResult::success((object)$array);

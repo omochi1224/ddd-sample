@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Basic\UseCaseSupport;
 
+use Basic\DomainSupport\ValueObjects\Enum;
+
 /**
  * Class UseCaseResult
  *
@@ -24,13 +26,13 @@ abstract class UseCaseResult
     /**
      * UseCaseResult constructor.
      *
-     * @param object|null $resultValue
-     * @param integer|null    $errorCode
+     * @param object|null                                 $resultValue
+     * @param \Basic\DomainSupport\ValueObjects\Enum|null $errorCode
      */
-    public function __construct(?object $resultValue, ?int $errorCode)
+    public function __construct(?object $resultValue, ?Enum $errorCode)
     {
         $this->resultValue = $resultValue;
-        $this->errorCode = $errorCode;
+        $this->errorCode = $errorCode?->value();
     }
 
     /**
@@ -45,11 +47,11 @@ abstract class UseCaseResult
 
     /**
      *
-     * @param integer $useCaseError
+     * @param \Basic\DomainSupport\ValueObjects\Enum $useCaseError
      *
      * @return static
      */
-    public static function fail(int $useCaseError): self
+    public static function fail(Enum $useCaseError): self
     {
         return new static(null, $useCaseError);
     }

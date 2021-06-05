@@ -6,6 +6,7 @@ namespace Basic\Test\ValueObject;
 
 use Basic\DomainSupport\Exception\InvariantException;
 use Basic\DomainSupport\ValueObjects\Enum;
+use Basic\DomainSupport\ValueObjects\IntOnlyEnum;
 use Basic\DomainSupport\ValueObjects\PositiveNumber;
 use Basic\DomainSupport\ValueObjects\StringValueObject;
 use Tests\TestCase;

@@ -41,16 +41,17 @@ final class UserRegisterUseCase
     {
         return $this->transaction->scope(
             function () use ($user): UserUseCaseResult {
+
                 //ID重複チェック
                 $existsId = $this->userRepository->findById($user->getUserId());
                 if (!is_null($existsId)) {
-                    return UserUseCaseResult::fail(UserUseCaseResultError::DUPLICATION_ID);
+                    return UserUseCaseResult::fail(UserUseCaseResultError::DUPLICATION_ID());
                 }
 
                 //メールアドレス重複チェック
                 $existsEmail = $this->userRepository->findByEmail($user->getUserEmail());
                 if (!is_null($existsEmail)) {
-                    return UserUseCaseResult::fail(UserUseCaseResultError::DUPLICATION_EMAIL);
+                    return UserUseCaseResult::fail(UserUseCaseResultError::DUPLICATION_EMAIL());
                 }
 
                 //パスワード暗号化
@@ -58,7 +59,7 @@ final class UserRegisterUseCase
 
                 //パスワードがHash化されたことを確認
                 if ($user->getUserPassword()->equals($encryptionUserPassword)) {
-                    return UserUseCaseResult::fail(UserUseCaseResultError::PASSWORD_ENCRYPT);
+                    return UserUseCaseResult::fail(UserUseCaseResultError::PASSWORD_ENCRYPT());
                 }
 
                 //暗号化パスワードに変更

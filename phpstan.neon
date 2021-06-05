@@ -17,7 +17,8 @@ parameters:
   checkUnionTypes: false
   polluteScopeWithLoopInitialAssignments: true
   polluteCatchScopeWithTryAssignments: false
-  ignoreErrors: []
+  ignoreErrors:
+      - '#Static call to instance method .*#'
   internalErrorsCountLimit: 50
   reportUnmatchedIgnoredErrors: true
   universalObjectCratesClasses:
