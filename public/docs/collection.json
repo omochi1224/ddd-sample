@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "502ee9a8-2098-42bc-8ae5-adc92360495a",
+        "_postman_id": "f1223024-ce35-44d7-94b8-0117267c0bc3",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -32,7 +32,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "eius",
+                                    "value": "nemo",
                                     "description": ""
                                 }
                             ]
@@ -71,7 +71,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "eius",
+                                            "value": "nemo",
                                             "description": ""
                                         }
                                     ]
@@ -113,7 +113,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "eius",
+                                            "value": "nemo",
                                             "description": ""
                                         }
                                     ]
@@ -155,7 +155,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "eius",
+                                            "value": "nemo",
                                             "description": ""
                                         }
                                     ]
@@ -218,7 +218,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "vitae",
+                                    "value": "enim",
                                     "description": ""
                                 }
                             ]
@@ -236,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id\": \"explicabo\",\n    \"name\": \"ratione\",\n    \"email\": \"stephon74@example.net\"\n}"
+                            "raw": "{\n    \"id\": \"tempore\",\n    \"name\": \"autem\",\n    \"email\": \"glover.talia@example.org\"\n}"
                         },
                         "description": "",
                         "auth": {
@@ -276,7 +276,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "vitae",
+                                            "value": "enim",
                                             "description": ""
                                         }
                                     ]
@@ -294,7 +294,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"id\": \"explicabo\",\n    \"name\": \"ratione\",\n    \"email\": \"stephon74@example.net\"\n}"
+                                    "raw": "{\n    \"id\": \"tempore\",\n    \"name\": \"autem\",\n    \"email\": \"glover.talia@example.org\"\n}"
                                 },
                                 "description": "",
                                 "auth": {

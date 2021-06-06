@@ -162,15 +162,15 @@ paths:
                                 id:
                                     type: string
                                     description: ''
-                                    example: explicabo
+                                    example: tempore
                                 name:
                                     type: string
                                     description: ''
-                                    example: ratione
+                                    example: autem
                                 email:
                                     type: string
                                     description: 'The value must be a valid email address.'
-                                    example: stephon74@example.net
+                                    example: glover.talia@example.org
             security: []
         parameters:
             -
@@ -186,4 +186,4 @@ paths:
                         value: ''
                     present:
                         summary: 'When the value is present'
-                        value: eius
+                        value: nemo
