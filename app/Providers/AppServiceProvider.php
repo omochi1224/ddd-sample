@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Providers\ServiceProvider\LocalServiceProvider;
 use App\Providers\ServiceProvider\ProductionServiceProvider;
 use App\Providers\ServiceProvider\Provider;
+use App\Providers\ServiceProvider\StagingServiceProvider;
 use App\Providers\ServiceProvider\TestServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use OutOfBoundsException;
@@ -44,15 +45,12 @@ class AppServiceProvider extends ServiceProvider
     private function provider(): Provider
     {
         $env = config('app.env');
-        switch ($env) {
-            case 'testing':
-                return new TestServiceProvider($this->app);
-            case 'local':
-                return new LocalServiceProvider($this->app);
-            case 'production':
-                return new ProductionServiceProvider($this->app);
-            default:
-                throw new OutOfBoundsException();
-        }
+        return match ($env) {
+            'testing' => new TestServiceProvider($this->app),
+            'local' => new LocalServiceProvider($this->app),
+            'staging' => new StagingServiceProvider($this->app),
+            'production' => new ProductionServiceProvider($this->app),
+            default => throw new OutOfBoundsException(),
+        };
     }
 }

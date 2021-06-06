@@ -51,6 +51,16 @@ paths:
                                     errors: { name: ['The name field is required.', 'The name may not be greater than 255 characters.'], email: ['The email field is required.', 'The email must be a valid email address.', 'The name may not be greater than 255 characters.'], password: ['The name field is required.', 'The password must be at least 8 characters.', 'The password confirmation does not match.'] }
                                 properties:
                                     errors: { type: object, example: { name: ['The name field is required.', 'The name may not be greater than 255 characters.'], email: ['The email field is required.', 'The email must be a valid email address.', 'The name may not be greater than 255 characters.'], password: ['The name field is required.', 'The password must be at least 8 characters.', 'The password confirmation does not match.'] } }
+                409:
+                    description: '409, Validation error'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    errors: { name: ['The name field is required.', 'The name may not be greater than 255 characters.'], email: ['The email field is required.', 'The email must be a valid email address.', 'The name may not be greater than 255 characters.'], password: ['The name field is required.', 'The password must be at least 8 characters.', 'The password confirmation does not match.'] }
+                                properties:
+                                    errors: { type: object, example: { name: ['The name field is required.', 'The name may not be greater than 255 characters.'], email: ['The email field is required.', 'The email must be a valid email address.', 'The name may not be greater than 255 characters.'], password: ['The name field is required.', 'The password must be at least 8 characters.', 'The password confirmation does not match.'] } }
             tags:
                 - User
             requestBody:
@@ -152,15 +162,15 @@ paths:
                                 id:
                                     type: string
                                     description: ''
-                                    example: est
+                                    example: tempore
                                 name:
                                     type: string
                                     description: ''
-                                    example: sunt
+                                    example: autem
                                 email:
                                     type: string
                                     description: 'The value must be a valid email address.'
-                                    example: mann.marcellus@example.com
+                                    example: glover.talia@example.org
             security: []
         parameters:
             -
@@ -176,4 +186,4 @@ paths:
                         value: ''
                     present:
                         summary: 'When the value is present'
-                        value: et
+                        value: nemo

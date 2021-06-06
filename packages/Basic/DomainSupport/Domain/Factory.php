@@ -26,10 +26,10 @@ interface Factory
     public function db(object $object): Domain;
 
     /**
-     * @param \Basic\DomainSupport\Domain\Domain $domain
+     * @param \Basic\DomainSupport\Domain\Domain $domain       domainInterfaceをimplementしてるDomainModel
      * @param string[]                           $hiddenOption 隠したい配列のキーを記述
      *
-     * @return array<mixed>
+     * @return array<string, mixed>
      */
     public function toArray(Domain $domain, array $hiddenOption = []): array;
 }

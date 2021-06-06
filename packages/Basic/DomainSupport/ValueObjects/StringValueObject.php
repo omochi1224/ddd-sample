@@ -10,22 +10,17 @@ namespace Basic\DomainSupport\ValueObjects;
  * Class StringValueObject
  *
  * @package Basic\DomainSupport\ValueObjects
+ *
  */
 abstract class StringValueObject
 {
-    /**
-     * @var string
-     */
-    protected string $value;
-
     /**
      * Identifier constructor.
      *
      * @param string $value
      */
-    private function __construct(string $value)
+    private function __construct(protected string $value)
     {
-        $this->value = $value;
     }
 
     /**
@@ -33,7 +28,7 @@ abstract class StringValueObject
      *
      * @return static
      */
-    public static function of(string $value): self
+    public static function of(string $value): static
     {
         return new static($value);
     }

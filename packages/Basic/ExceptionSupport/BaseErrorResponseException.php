@@ -21,22 +21,17 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     protected $message;
 
     /**
-     * @var integer
-     */
-    protected $statusCode;
-
-    /**
      * @var string|null
      */
-    protected $errorCode;
+    protected ?string $errorCode = null;
 
     /**
      * 初期エラーコード一覧
      * ステータスコードに紐付いた基本的なエラーコードで、アプリケーション固有のエラーコードは定義しない
      *
-     * @var array
+     * @var array<int, string>
      */
-    protected $defaultErrorCodes = [
+    protected array $defaultErrorCodes = [
         400 => 'bad_request',
         401 => 'unauthorized',
         403 => 'forbidden',
@@ -52,16 +47,15 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
      * @param string  $message
      * @param integer $statusCode
      */
-    public function __construct(string $message = '', int $statusCode = 500)
+    final public function __construct(string $message = '', private int $statusCode = 500)
     {
         $this->message = $message;
-        $this->statusCode = $statusCode;
     }
 
     /**
      * @param string $message
      */
-    public function setErrorMessage(string $message): void
+    final public function setErrorMessage(string $message): void
     {
         $this->message = $message;
     }
@@ -71,7 +65,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
      *
      * @return JsonResponse
      */
-    public function toResponse($request)
+    public function toResponse($request): JsonResponse
     {
         return new JsonResponse(
             $this->getBasicResponse(),
@@ -82,14 +76,11 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @return array[]
      */
-    protected function getBasicResponse()
+    final protected function getBasicResponse(): array
     {
         return [
             'errors' => [
-                [
-                    'message' => $this->getErrorMessage(),
-                    'code' => $this->getErrorCode(),
-                ]
+                'message' => $this->getErrorMessage(),
             ]
         ];
     }
@@ -97,7 +88,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @return string
      */
-    public function getErrorMessage(): string
+    final public function getErrorMessage(): string
     {
         return $this->message;
     }
@@ -105,7 +96,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @return null|string
      */
-    public function getErrorCode(): ?string
+    final public function getErrorCode(): ?string
     {
         return $this->errorCode;
     }
@@ -113,7 +104,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @param string $errorCode
      */
-    public function setErrorCode(string $errorCode): void
+    final public function setErrorCode(string $errorCode): void
     {
         $this->errorCode = $errorCode;
     }
@@ -121,7 +112,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @return integer
      */
-    public function getStatusCode(): int
+    final public function getStatusCode(): int
     {
         return $this->statusCode;
     }
@@ -129,7 +120,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @param integer $statusCode
      */
-    public function setStatusCode(int $statusCode): void
+    final public function setStatusCode(int $statusCode): void
     {
         $this->statusCode = $statusCode;
     }
@@ -137,7 +128,7 @@ class BaseErrorResponseException extends RuntimeException implements Responsable
     /**
      * @return string
      */
-    protected function getDefaultErrorCode(): string
+    final protected function getDefaultErrorCode(): string
     {
         return $this->defaultErrorCodes[$this->getStatusCode()];
     }

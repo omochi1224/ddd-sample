@@ -14,18 +14,12 @@ namespace Basic\DomainSupport\ValueObjects;
 abstract class IntValueObject
 {
     /**
-     * @var integer
-     */
-    protected int $value;
-
-    /**
      * Identifier constructor.
      *
      * @param integer $value
      */
-    private function __construct(int $value)
+    private function __construct(protected int $value)
     {
-        $this->value = $value;
     }
 
     /**
@@ -33,7 +27,7 @@ abstract class IntValueObject
      *
      * @return static
      */
-    public static function of(int $value): self
+    public static function of(int $value): static
     {
         return new static($value);
     }

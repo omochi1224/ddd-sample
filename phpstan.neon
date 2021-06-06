@@ -17,7 +17,8 @@ parameters:
   checkUnionTypes: false
   polluteScopeWithLoopInitialAssignments: true
   polluteCatchScopeWithTryAssignments: false
-  ignoreErrors: []
+  ignoreErrors:
+      - '#Static call to instance method .*#'
   internalErrorsCountLimit: 50
   reportUnmatchedIgnoredErrors: true
   universalObjectCratesClasses:
@@ -27,3 +28,12 @@ parameters:
     - packages/Basic #除外ディレクトリ
   paths:
     - packages
+services:
+  -
+    class: PHPStan\Rules\DisallowedConstructs\DisallowedEmptyRule
+    tags:
+      - phpstan.rules.rule
+  -
+    class: PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
+    tags:
+      - phpstan.rules.rule

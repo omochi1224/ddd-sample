@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Auth\Presentation\Controllers;
 
 use App\Http\Controllers\Controller;
+use Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResultError;
 use Auth\Application\UseCase\UserUseCase\UserRegisterUseCase;
 use Auth\Domain\Models\User\UserFactory;
 use Auth\Presentation\Requests\RegisterRequest;
+use Auth\Presentation\Response\Errors\DuplicationEmailErrorResponseException;
+use Auth\Presentation\Response\Errors\DuplicationIdErrorResponseException;
+use Auth\Presentation\Response\Errors\NotFoundErrorResponseException;
+use Basic\ExceptionSupport\BaseErrorResponseException;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -17,8 +22,6 @@ use Illuminate\Http\JsonResponse;
  */
 final class RegisterController extends Controller
 {
-    use ErrorResponse;
-
     /**
      * @var \Auth\Application\UseCase\UserUseCase\UserRegisterUseCase
      */
@@ -44,18 +47,18 @@ final class RegisterController extends Controller
     /**
      * ユーザの登録
      *
-     * @group User
+     * @group     User
      *
      * @param \Auth\Presentation\Requests\RegisterRequest $request
      *
      * @urlParam  users
      *
-     * @response 200 {
+     * @response  200 {
      *     "id":"UUID",
      *     "name":"TestName",
      *     "email":"test@example.com"
      * }
-     * @response status=422 scenario="Validation error" {
+     * @response  status=422 scenario="Validation error" {
      * "errors":{
      *    "name":[
      *      "The name field is required.",
@@ -74,6 +77,24 @@ final class RegisterController extends Controller
      *  }
      * }
      *
+     * @response  status=409 scenario="Validation error" {
+     * "errors":{
+     *    "name":[
+     *      "The name field is required.",
+     *      "The name may not be greater than 255 characters."
+     *    ],
+     *    "email":[
+     *      "The email field is required.",
+     *      "The email must be a valid email address.",
+     *      "The name may not be greater than 255 characters."
+     *    ],
+     *    "password":[
+     *      "The name field is required.",
+     *      "The password must be at least 8 characters.",
+     *      "The password confirmation does not match."
+     *    ]
+     *  }
+     * }
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -81,7 +102,12 @@ final class RegisterController extends Controller
     {
         $result = $this->useCase->invoke($request->toDomain());
         if ($result->isError()) {
-            return $this->errorResponse($result->getErrorCode());
+            match ($result->getErrorCode()) {
+                default => throw new BaseErrorResponseException(),
+                UserUseCaseResultError::NOT_FOUND => throw new NotFoundErrorResponseException(),
+                UserUseCaseResultError::DUPLICATION_ID => throw new DuplicationIdErrorResponseException(),
+                UserUseCaseResultError::DUPLICATION_EMAIL => throw new DuplicationEmailErrorResponseException(),
+            };
         }
 
         /** @var \Auth\Domain\Models\User\User $user */

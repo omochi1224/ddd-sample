@@ -20,30 +20,10 @@ use Basic\DomainSupport\Domain\Getter;
  * @method UserPassword getUserPassword()
  * @package Auth\Domain\Models\User
  */
-final class User extends Domain
+final class User implements Domain
 {
     /** 動的Getter */
     use Getter;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserId
-     */
-    private UserId $userId;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserName
-     */
-    private UserName $userName;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserEmail
-     */
-    private UserEmail $userEmail;
-
-    /**
-     * @var \Auth\Domain\Models\User\ValueObject\UserPassword
-     */
-    private UserPassword $userPassword;
 
     /**
      * User constructor.
@@ -53,12 +33,12 @@ final class User extends Domain
      * @param \Auth\Domain\Models\User\ValueObject\UserEmail    $userEmail
      * @param \Auth\Domain\Models\User\ValueObject\UserPassword $userPassword
      */
-    public function __construct(UserId $userId, UserName $userName, UserEmail $userEmail, UserPassword $userPassword)
-    {
-        $this->userId = $userId;
-        $this->userName = $userName;
-        $this->userEmail = $userEmail;
-        $this->userPassword = $userPassword;
+    public function __construct(
+        private UserId $userId,
+        private UserName $userName,
+        private UserEmail $userEmail,
+        private UserPassword $userPassword
+    ) {
     }
 
     /**

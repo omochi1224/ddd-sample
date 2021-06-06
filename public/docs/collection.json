@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "8f76192f-236a-4d86-a54c-7cefe06b9e01",
+        "_postman_id": "f1223024-ce35-44d7-94b8-0117267c0bc3",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -32,7 +32,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "et",
+                                    "value": "nemo",
                                     "description": ""
                                 }
                             ]
@@ -71,7 +71,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "et",
+                                            "value": "nemo",
                                             "description": ""
                                         }
                                     ]
@@ -113,7 +113,49 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "et",
+                                            "value": "nemo",
+                                            "description": ""
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"testName\",\n    \"email\": \"example@example.com\",\n    \"password\": \"Passw0rd!\",\n    \"password_confirmation\": \"Passw0rd!\"\n}"
+                                },
+                                "description": "",
+                                "auth": {
+                                    "type": "noauth"
+                                }
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\",\n            \"The name may not be greater than 255 characters.\"\n        ],\n        \"email\": [\n            \"The email field is required.\",\n            \"The email must be a valid email address.\",\n            \"The name may not be greater than 255 characters.\"\n        ],\n        \"password\": [\n            \"The name field is required.\",\n            \"The password must be at least 8 characters.\",\n            \"The password confirmation does not match.\"\n        ]\n    }\n}"
+                        },
+                        {
+                            "name": "\u30e6\u30fc\u30b6\u306e\u767b\u9332 Response #3",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users",
+                                    "variable": [
+                                        {
+                                            "id": "users",
+                                            "key": "users",
+                                            "value": "nemo",
                                             "description": ""
                                         }
                                     ]
@@ -176,7 +218,7 @@
                                 {
                                     "id": "users",
                                     "key": "users",
-                                    "value": "in",
+                                    "value": "enim",
                                     "description": ""
                                 }
                             ]
@@ -194,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"id\": \"est\",\n    \"name\": \"sunt\",\n    \"email\": \"mann.marcellus@example.com\"\n}"
+                            "raw": "{\n    \"id\": \"tempore\",\n    \"name\": \"autem\",\n    \"email\": \"glover.talia@example.org\"\n}"
                         },
                         "description": "",
                         "auth": {
@@ -234,7 +276,7 @@
                                         {
                                             "id": "users",
                                             "key": "users",
-                                            "value": "in",
+                                            "value": "enim",
                                             "description": ""
                                         }
                                     ]
@@ -252,7 +294,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"id\": \"est\",\n    \"name\": \"sunt\",\n    \"email\": \"mann.marcellus@example.com\"\n}"
+                                    "raw": "{\n    \"id\": \"tempore\",\n    \"name\": \"autem\",\n    \"email\": \"glover.talia@example.org\"\n}"
                                 },
                                 "description": "",
                                 "auth": {

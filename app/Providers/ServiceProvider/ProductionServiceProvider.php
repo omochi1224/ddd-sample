@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers\ServiceProvider;
 
 use App\lib\Hash\LaravelUserPasswordHasher;
+use App\lib\Logger\LaravelLogger;
 use App\lib\Transaction\LaravelDbTransaction;
 use App\lib\Uuid\LaravelUuid;
 use Auth\Domain\Models\User\UserQueryService;
@@ -13,6 +14,7 @@ use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Infrastructure\QueryService\Eloquent\EloquentUserQueryService;
 use Auth\Infrastructure\Repositories\Eloquent\EloquentUserRepository;
 use Basic\DomainSupport\Domain\Uuid;
+use Basic\LoggerSupport\Logger;
 use Basic\Transaction\Transaction;
 use Illuminate\Contracts\Foundation\Application;
 
@@ -61,6 +63,7 @@ final class ProductionServiceProvider implements Provider
         $this->app->bind(Transaction::class, LaravelDbTransaction::class);
         $this->app->bind(UserPasswordHasher::class, LaravelUserPasswordHasher::class);
         $this->app->bind(Uuid::class, LaravelUuid::class);
+        $this->app->bind(Logger::class, LaravelLogger::class);
     }
 
     /**

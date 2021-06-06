@@ -17,18 +17,12 @@ use Auth\Domain\Models\User\UserQueryService;
 final class UserFindUseCase
 {
     /**
-     * @var \Auth\Domain\Models\User\UserQueryService
-     */
-    private UserQueryService $queryService;
-
-    /**
      * UserFindUseCase constructor.
      *
      * @param \Auth\Domain\Models\User\UserQueryService $queryService
      */
-    public function __construct(UserQueryService $queryService)
+    public function __construct(private UserQueryService $queryService)
     {
-        $this->queryService = $queryService;
     }
 
     /**
@@ -49,8 +43,8 @@ final class UserFindUseCase
             $queryData
         );
 
-        if (empty($array)) {
-            return UserUseCaseResult::fail(UserUseCaseResultError::NOT_FOUND);
+        if ($array === []) {
+            return UserUseCaseResult::fail(UserUseCaseResultError::NOT_FOUND());
         }
 
         return UserUseCaseResult::success((object)$array);
