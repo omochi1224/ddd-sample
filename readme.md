@@ -23,37 +23,37 @@ docker-compose exec php php artisan key:generate
 
 新規機能(パッケージ)追加
 ```bash
-docker-compose php php artisan make:feature
+docker-compose exec php php artisan make:feature
 ```
 
 すべてのテスト実行
 ```bash
-docker-compose php composer test
+docker-compose exec php composer test
 ```
 
 コードが整形リスト
 ```bash
-docker-compose php composer sniffer
+docker-compose exec php composer sniffer
 ```
 
 コードが整形リストCSV
 ```bash
-docker-compose php composer sniffer-report-csv
+docker-compose exec php composer sniffer-report-csv
 ```
 
 コード整形
 ```bash
-docker-compose php composer sniffer-rewrite
+docker-compose exec php composer sniffer-rewrite
 ```
 
 静的解析
 ```bash
-docker-compose php composer static-type-check
+docker-compose exec php composer static-type-check
 ```
 
 API仕様書出力
 ```bash
-docker-compose php composer document-generator
+docker-compose exec php composer document-generator
 ```
 
 
