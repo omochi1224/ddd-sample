@@ -13,7 +13,7 @@ DDD（オニオンアーキテクチャ、CQRS)を導入したLaravel
 # Usage
 
 ```bash
-git clone https://github.com/omochi1224/ddd-sample.git
+git clone -b 'with-docker(php8.0)' https://github.com/omochi1224/ddd-sample.git 
 cd ddd-sample
 cp .env.example .env
 docker-compose up -d
