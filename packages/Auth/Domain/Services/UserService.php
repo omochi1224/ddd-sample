@@ -10,6 +10,8 @@ use Auth\Domain\Models\User\User;
 use Auth\Domain\Models\User\UserRepository;
 
 /**
+ * ユーザドメインに入り込めないコード
+ *
  * Class UserService
  *
  * @package Auth\Domain\Services
@@ -38,11 +40,13 @@ final class UserService
      */
     public function isDuplicated(User $user): bool
     {
-        if (!is_null($this->userRepository->findByEmail($user->getUserEmail()))) {
+        /** ユーザエラー */
+        if ($this->userRepository->findByEmail($user->getUserEmail()) !== null) {
             return true;
         }
 
-        if (!is_null($this->userRepository->findById($user->getUserId()))) {
+        /** システムエラー */
+        if ($this->userRepository->findById($user->getUserId()) !== null) {
             throw new UserIdDuplicationException();
         }
 
@@ -50,6 +54,8 @@ final class UserService
     }
 
     /**
+     * パスワード暗号化
+     *
      * @param \Auth\Domain\Models\User\User $user
      *
      * @return \Auth\Domain\Models\User\User

@@ -11,7 +11,8 @@
         "php": "^8.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "ext-http": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.7.0",
@@ -85,6 +86,13 @@
         ],
         "document-generator": [
             "@php artisan scribe:generate"
+        ],
+        "all" : [
+            "./vendor/bin/phpcbf --standard=phpcs.xml ./packages/",
+            "./vendor/bin/phpcbf --standard=phpcs.xml ./packages/",
+            "./vendor/bin/phpcs --standard=phpcs.xml ./packages/",
+            "./vendor/bin/phpstan analyse -c phpstan.neon",
+            "./vendor/bin/phpunit"
         ],
         "cache:clear": [
             "@php artisan cache:clear",

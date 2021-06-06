@@ -11,7 +11,7 @@ use Basic\DomainSupport\Exception\DomainException;
  *
  * @package Auth\Domain\Exception
  */
-final class UserPasswordHaherException extends DomainException
+final class UserPasswordHaherException extends \Exception
 {
 
 }
