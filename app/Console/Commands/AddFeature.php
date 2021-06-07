@@ -71,7 +71,8 @@ class AddFeature extends Command
         $dirs = [
             'Application' => ['Dtos','UseCases'],
             'Domain' => ['Exceptions', 'Models', 'Services'],
-            'Infrastructure' => ['Eloquents','QueryServices','Repositories']
+            'Infrastructure' => ['Eloquents','QueryServices','Repositories'],
+            'Factory' => [],
         ];
 
         foreach ($dirs as $key => $dir) {
