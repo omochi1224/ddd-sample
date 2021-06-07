@@ -42,6 +42,7 @@ return [
 
         'single' => [
             'driver' => 'single',
+            'tap' => [App\Logging\CustomizeFormatter::class], // ← 追記
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
         ],
