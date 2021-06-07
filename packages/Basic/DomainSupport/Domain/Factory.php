@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Basic\DomainSupport\Domain;
 
 /**
+ * DomainFactoryについては基本的にこれをimplementsしてください
+ *
  * Interface Factory
  *
  * @package Basic\DomainSupport\Domain
