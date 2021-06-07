@@ -82,8 +82,6 @@ final class RegisterRequest extends FormRequest implements Domainable
     {
         /** @var UserFactory $factory */
         $factory = app(UserFactory::class);
-        /** @var User $user */
-        $user = $factory->request($this);
-        return $user;
+        return $factory->request($this);
     }
 }

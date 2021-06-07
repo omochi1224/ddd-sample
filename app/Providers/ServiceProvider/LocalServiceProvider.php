@@ -8,9 +8,11 @@ use App\lib\Hash\LaravelUserPasswordHasher;
 use App\lib\Logger\LaravelLogger;
 use App\lib\Transaction\LaravelDbTransaction;
 use App\lib\Uuid\LaravelUuid;
+use Auth\Domain\Models\User\UserFactory;
 use Auth\Domain\Models\User\UserQueryService;
 use Auth\Domain\Models\User\UserRepository;
 use Auth\Domain\Services\UserPasswordHasher;
+use Auth\Factory\UserDomainFactory;
 use Auth\Infrastructure\QueryService\Eloquent\EloquentUserQueryService;
 use Auth\Infrastructure\Repositories\Eloquent\EloquentUserRepository;
 use Basic\DomainSupport\Domain\Uuid;
@@ -71,6 +73,7 @@ final class LocalServiceProvider implements Provider
      */
     public function registerFactory(): void
     {
+        $this->app->bind(UserFactory::class, UserDomainFactory::class);
     }
 
     /**
