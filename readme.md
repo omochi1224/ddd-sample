@@ -25,6 +25,20 @@ docker-compose exec php php artisan key:generate
 ```bash
 docker-compose exec php php artisan make:feature
 ```
+パッケージ追加時はcomposer.jsonのautoloadにpsr-4の記述で追加してください。<br>
+例
+```json
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Basic\\": "packages/Basic",
+            "Auth\\": "packages/Auth",
+            "AddPackage\\": "packages/AddPackage"
+        }
+    }
+}
+```
 
 すべてのテスト実行
 ```bash
