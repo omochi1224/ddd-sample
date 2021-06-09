@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auth\Domain\Models\User;
 
+use Auth\Domain\Exception\UserNotFoundException;
 use Auth\Domain\Models\User\ValueObject\UserEmail;
 use Auth\Domain\Models\User\ValueObject\UserId;
 
@@ -15,31 +16,31 @@ use Auth\Domain\Models\User\ValueObject\UserId;
 interface UserRepository
 {
     /**
-     * @param \Auth\Domain\Models\User\User $user
+     * @param User $user
      *
      * @return void
      */
     public function store(User $user): void;
 
     /**
-     * @param \Auth\Domain\Models\User\ValueObject\UserId $userId
+     * @param UserId $userId
      *
-     * @return \Auth\Domain\Models\User\User|null
+     * @return User|null
      */
     public function findById(UserId $userId): ?User;
 
     /**
-     * @param \Auth\Domain\Models\User\ValueObject\UserEmail $userEmail
+     * @param UserEmail $userEmail
      *
-     * @return \Auth\Domain\Models\User\User|null
+     * @return User|null
      */
     public function findByEmail(UserEmail $userEmail): ?User;
 
     /**
-     * @param \Auth\Domain\Models\User\ValueObject\UserId $userId
+     * @param UserId $userId
      *
      * @return void
-     * @throws \Auth\Domain\Exception\UserNotFoundException
+     * @throws UserNotFoundException
      */
     public function delete(UserId $userId): void;
 }

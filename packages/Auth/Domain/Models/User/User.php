@@ -28,10 +28,10 @@ final class User implements Domain
     /**
      * User constructor.
      *
-     * @param \Auth\Domain\Models\User\ValueObject\UserId       $userId
-     * @param \Auth\Domain\Models\User\ValueObject\UserName     $userName
-     * @param \Auth\Domain\Models\User\ValueObject\UserEmail    $userEmail
-     * @param \Auth\Domain\Models\User\ValueObject\UserPassword $userPassword
+     * @param UserId       $userId
+     * @param UserName     $userName
+     * @param UserEmail    $userEmail
+     * @param UserPassword $userPassword
      */
     public function __construct(
         private UserId $userId,
@@ -44,7 +44,7 @@ final class User implements Domain
     /**
      * 名前変更
      *
-     * @param \Auth\Domain\Models\User\ValueObject\UserName $userName
+     * @param UserName $userName
      *
      * @return void
      */
@@ -56,7 +56,7 @@ final class User implements Domain
     /**
      * パスワード変更
      *
-     * @param \Auth\Domain\Models\User\ValueObject\UserPassword $userPassword
+     * @param UserPassword $userPassword
      *
      * @return void
      */
@@ -68,7 +68,7 @@ final class User implements Domain
     /**
      * メールアドレス変更
      *
-     * @param \Auth\Domain\Models\User\ValueObject\UserEmail $userEmail
+     * @param UserEmail $userEmail
      *
      * @return void
      */

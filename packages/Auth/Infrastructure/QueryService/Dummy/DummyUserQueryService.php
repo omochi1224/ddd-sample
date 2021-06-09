@@ -19,7 +19,7 @@ final class DummyUserQueryService implements UserQueryService
      * @param string|null $name
      * @param string|null $email
      *
-     * @return \Auth\Application\Dto\UserDto[]
+     * @return UserDto[]
      */
     public function invoke(?string $id = null, ?string $name = null, ?string $email = null): array
     {

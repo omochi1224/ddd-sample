@@ -22,14 +22,14 @@ use Illuminate\Http\JsonResponse;
 final class UserFindController extends Controller
 {
     /**
-     * @var \Auth\Application\UseCase\UserUseCase\UserFindUseCase
+     * @var UserFindUseCase
      */
     private UserFindUseCase $useCase;
 
     /**
      * UserFindController constructor.
      *
-     * @param \Auth\Application\UseCase\UserUseCase\UserFindUseCase $useCase
+     * @param UserFindUseCase $useCase
      */
     public function __construct(UserFindUseCase $useCase)
     {
@@ -41,7 +41,7 @@ final class UserFindController extends Controller
      *
      * @group     User
      *
-     * @param \Auth\Presentation\Requests\UserFindRequest $request
+     * @param UserFindRequest $request
      *
      * @urlParam  users
      * @response  200 {
@@ -50,7 +50,7 @@ final class UserFindController extends Controller
      *     "email":"test@example.com"
      * }
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function __invoke(UserFindRequest $request): JsonResponse
     {

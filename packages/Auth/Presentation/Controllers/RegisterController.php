@@ -7,12 +7,14 @@ namespace Auth\Presentation\Controllers;
 use App\Http\Controllers\Controller;
 use Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResultError;
 use Auth\Application\UseCase\UserUseCase\UserRegisterUseCase;
+use Auth\Domain\Models\User\User;
 use Auth\Domain\Models\User\UserFactory;
 use Auth\Presentation\Requests\RegisterRequest;
 use Auth\Presentation\Response\Errors\DuplicationEmailErrorResponseException;
 use Auth\Presentation\Response\Errors\DuplicationIdErrorResponseException;
 use Auth\Presentation\Response\Errors\NotFoundErrorResponseException;
 use Basic\ExceptionSupport\BaseErrorResponseException;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -23,20 +25,20 @@ use Illuminate\Http\JsonResponse;
 final class RegisterController extends Controller
 {
     /**
-     * @var \Auth\Application\UseCase\UserUseCase\UserRegisterUseCase
+     * @var UserRegisterUseCase
      */
     private UserRegisterUseCase $useCase;
 
     /**
-     * @var \Auth\Domain\Models\User\UserFactory
+     * @var UserFactory
      */
     private UserFactory $userFactory;
 
     /**
      * RegisterController constructor.
      *
-     * @param \Auth\Application\UseCase\UserUseCase\UserRegisterUseCase $useCase
-     * @param \Auth\Domain\Models\User\UserFactory                      $userFactory
+     * @param UserRegisterUseCase $useCase
+     * @param UserFactory         $userFactory
      */
     public function __construct(UserRegisterUseCase $useCase, UserFactory $userFactory)
     {
@@ -49,7 +51,7 @@ final class RegisterController extends Controller
      *
      * @group     User
      *
-     * @param \Auth\Presentation\Requests\RegisterRequest $request
+     * @param RegisterRequest $request
      *
      * @urlParam  users
      *
@@ -95,8 +97,8 @@ final class RegisterController extends Controller
      *    ]
      *  }
      * }
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function __invoke(RegisterRequest $request): JsonResponse
     {
@@ -110,7 +112,7 @@ final class RegisterController extends Controller
             };
         }
 
-        /** @var \Auth\Domain\Models\User\User $user */
+        /** @var User $user */
         $user = $result->getResultValue();
         return response()->json($this->userFactory->toArray($user, ['password']));
     }

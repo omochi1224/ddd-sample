@@ -8,7 +8,6 @@ use Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResult;
 use Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResultError;
 use Auth\Domain\Models\User\User;
 use Auth\Domain\Models\User\UserRepository;
-use Auth\Domain\Services\UserPasswordHasher;
 use Auth\Domain\Services\UserService;
 use Basic\Transaction\Transaction;
 
@@ -22,23 +21,21 @@ final class UserRegisterUseCase
     /**
      * UserRegisterUseCase constructor.
      *
-     * @param \Auth\Domain\Models\User\UserRepository  $userRepository
-     * @param \Basic\Transaction\Transaction           $transaction
-     * @param \Auth\Domain\Services\UserPasswordHasher $userPasswordHasher
-     * @param \Auth\Domain\Services\UserService        $userService
+     * @param UserRepository $userRepository
+     * @param Transaction    $transaction
+     * @param UserService    $userService
      */
     public function __construct(
         private UserRepository $userRepository,
         private Transaction $transaction,
-        private UserPasswordHasher $userPasswordHasher,
         private UserService $userService,
     ) {
     }
 
     /**
-     * @param \Auth\Domain\Models\User\User $user
+     * @param User $user
      *
-     * @return \Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResult
+     * @return UserUseCaseResult
      */
     public function invoke(User $user): UserUseCaseResult
     {

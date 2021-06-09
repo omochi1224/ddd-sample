@@ -8,6 +8,7 @@ use Auth\Domain\Models\User\User;
 use Auth\Domain\Models\User\UserFactory;
 use Basic\DomainSupport\Domain\Domainable;
 use Basic\RequestSupport\ApiFormRequestTrait;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -75,8 +76,8 @@ final class RegisterRequest extends FormRequest implements Domainable
     }
 
     /**
-     * @return \Auth\Domain\Models\User\User
-     * @throws \Exception
+     * @return User
+     * @throws Exception
      */
     public function toDomain(): User
     {

@@ -13,13 +13,14 @@ use Auth\Domain\Models\User\ValueObject\UserPassword;
 use Basic\DomainSupport\Domain\Domain;
 use Basic\DomainSupport\Domain\Factory;
 use Basic\DomainSupport\Domain\Uuid;
+use Exception;
 
 final class UserDomainFactory implements UserFactory, Factory
 {
     /**
      * UserFactory constructor.
      *
-     * @param \Basic\DomainSupport\Domain\Uuid $uuid
+     * @param Uuid $uuid
      */
     public function __construct(private Uuid $uuid)
     {
@@ -28,8 +29,8 @@ final class UserDomainFactory implements UserFactory, Factory
     /**
      * @param object $object
      *
-     * @return \Auth\Domain\Models\User\User
-     * @throws \Exception
+     * @return User
+     * @throws Exception
      */
     public function request(object $object): User
     {
@@ -45,7 +46,7 @@ final class UserDomainFactory implements UserFactory, Factory
     /**
      * @param object $object
      *
-     * @return \Auth\Domain\Models\User\User
+     * @return User
      */
     public function db(object $object): User
     {
@@ -58,8 +59,8 @@ final class UserDomainFactory implements UserFactory, Factory
     }
 
     /**
-     * @param \Basic\DomainSupport\Domain\Domain $domain
-     * @param string[]                           $hiddenOption
+     * @param Domain   $domain
+     * @param string[] $hiddenOption
      *
      * @return array<string, string>
      */

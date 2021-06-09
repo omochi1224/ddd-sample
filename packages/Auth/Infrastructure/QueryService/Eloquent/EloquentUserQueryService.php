@@ -18,7 +18,7 @@ final class EloquentUserQueryService implements UserQueryService
     /**
      * EloquentUserQueryService constructor.
      *
-     * @param \Auth\Infrastructure\Eloquent\EloquentUser $eloquentUser
+     * @param EloquentUser $eloquentUser
      */
     public function __construct(private EloquentUser $eloquentUser)
     {

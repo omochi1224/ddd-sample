@@ -21,8 +21,8 @@ final class UserService
     /**
      * UserService constructor.
      *
-     * @param \Auth\Domain\Services\UserPasswordHasher $passwordHasher
-     * @param \Auth\Domain\Models\User\UserRepository  $userRepository
+     * @param UserPasswordHasher $passwordHasher
+     * @param UserRepository     $userRepository
      */
     public function __construct(
         private UserPasswordHasher $passwordHasher,
@@ -33,10 +33,10 @@ final class UserService
     /**
      * ユーザの重複チェック
      *
-     * @param \Auth\Domain\Models\User\User $user
+     * @param User $user
      *
      * @return boolean
-     * @throws \Auth\Domain\Exception\UserIdDuplicationException
+     * @throws UserIdDuplicationException
      */
     public function isDuplicated(User $user): bool
     {
@@ -56,10 +56,10 @@ final class UserService
     /**
      * パスワード暗号化
      *
-     * @param \Auth\Domain\Models\User\User $user
+     * @param User $user
      *
-     * @return \Auth\Domain\Models\User\User
-     * @throws \Auth\Domain\Exception\UserPasswordHaherException
+     * @return User
+     * @throws UserPasswordHaherException
      */
     public function passwordHaher(User $user): User
     {

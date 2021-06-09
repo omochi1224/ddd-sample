@@ -15,16 +15,16 @@ use Auth\Domain\Models\User\ValueObject\UserPassword;
 interface UserPasswordHasher
 {
     /**
-     * @param string                        $password
-     * @param \Auth\Domain\Models\User\User $user
+     * @param string $password
+     * @param User   $user
      *
      * @return boolean
      */
     public function checkByUser(string $password, User $user): bool;
 
     /**
-     * @param string                                            $password
-     * @param \Auth\Domain\Models\User\ValueObject\UserPassword $hash
+     * @param string       $password
+     * @param UserPassword $hash
      *
      * @return boolean
      */
@@ -33,7 +33,7 @@ interface UserPasswordHasher
     /**
      * @param string $password
      *
-     * @return \Auth\Domain\Models\User\ValueObject\UserPassword
+     * @return UserPassword
      */
     public function make(string $password): UserPassword;
 }

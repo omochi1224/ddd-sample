@@ -19,7 +19,7 @@ final class UserFindUseCase
     /**
      * UserFindUseCase constructor.
      *
-     * @param \Auth\Domain\Models\User\UserQueryService $queryService
+     * @param UserQueryService $queryService
      */
     public function __construct(private UserQueryService $queryService)
     {
@@ -30,7 +30,7 @@ final class UserFindUseCase
      * @param string|null $name
      * @param string|null $email
      *
-     * @return \Auth\Application\UseCase\UserUseCase\Result\UserUseCaseResult
+     * @return UserUseCaseResult
      */
     public function invoke(?string $id = null, ?string $name = null, ?string $email = null): UserUseCaseResult
     {
